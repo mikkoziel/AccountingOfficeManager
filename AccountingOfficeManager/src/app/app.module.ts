@@ -15,17 +15,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
+import { WorkManagementComponent } from './components/work-management/work-management.component';
+import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const components = [
   AppComponent,
   HomeComponent,
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
+  UserHomeComponent,
+  WorkManagementComponent,
+  ClientManagementComponent,
+  UserProfileComponent,
 ]
 
 const material = [
@@ -34,13 +42,13 @@ const material = [
   MatIconModule,
   MatButtonModule,
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatGridListModule,
 ]
 
 @NgModule({
   declarations: [
     components,
-    UserHomeComponent,
   ],
   imports: [
     BrowserModule,
