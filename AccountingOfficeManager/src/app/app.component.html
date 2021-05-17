@@ -4,40 +4,38 @@
       <a class="navbar-brand" [routerLink]="'.'">{{title}}</a>
       <span class="spacer"></span>
     
-      <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      <!-- <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
         &#9776;
-      </button>
+      </button> -->
     
-      <div [ngbCollapse]="isMenuCollapsed" 
+      <!-- <div [ngbCollapse]="isMenuCollapsed" 
           class="collapse navbar-collapse"
           [ngStyle]="{'flex': isMenuCollapsed ? '0 1 auto': '0 1 100%'}"
-          >
-        <ul class="navbar-nav">
-          <li class="nav-item active" id="home-bttn">
+          > -->
+        <!-- <ul class="navbar-nav"> -->
+          <!-- <li class="nav-item active" id="home-bttn"> -->
             <!-- <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Home</a> -->
-          </li>
-          <li>
+          <!-- </li> -->
+          <!-- <li> -->
           <!-- <li class="nav-item" *ngIf="isAdmin"> -->
             <!-- <a class="nav-link" [routerLink]="'/admin-panel'" (click)="isMenuCollapsed = true">Admin</a> -->
-          </li>
-          <li class="nav-item">
+          <!-- </li> -->
+          <!-- <li class="nav-item"> -->
             <!-- <a class="nav-link" [routerLink]="'/cart'" (click)="isMenuCollapsed = true">Cart</a> -->
-          </li>
-          <li class="nav-item">
+          <!-- </li> -->
+          <!-- <li class="nav-item"> -->
             <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a> -->
-          </li>
-        </ul>
-      </div>
+          <!-- </li> -->
+        <!-- </ul> -->
+      <!-- </div> -->
     </nav>
   </div>
 
   <mat-sidenav-container class="container_class">  
     <mat-sidenav #sidenav class="sidenav_class" 
           mode="side" opened>
-      <!-- <app-koszyk-main id="koszyk"></app-koszyk-main> -->
-      <mat-icon>account_balance</mat-icon>
-      <mat-divider></mat-divider>
-      <!-- <app-filter></app-filter> -->
+      <mat-icon routerLink="/user-home">account_balance</mat-icon>
+      <!-- <mat-divider></mat-divider> -->
     </mat-sidenav>
     <mat-sidenav-content>
       <button mat-raised-button color="warn" (click)="sidenav.toggle()" class="open_close">

@@ -12,3 +12,15 @@
     justify-content: center;
     align-content: center;
 }
+
+::ng-deep .mat-form-field-label {
+    color: white !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    background-color: white !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+    background-color: white !important;;
+}
