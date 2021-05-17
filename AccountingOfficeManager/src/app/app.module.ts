@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const components = [
   AppComponent,
