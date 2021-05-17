@@ -24,6 +24,7 @@ import { UserHomeComponent } from './components/user-home/user-home.component';
 import { WorkManagementComponent } from './components/work-management/work-management.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const components = [
   AppComponent,
@@ -34,6 +35,7 @@ const components = [
   WorkManagementComponent,
   ClientManagementComponent,
   UserProfileComponent,
+  CalendarComponent,
 ]
 
 const material = [
