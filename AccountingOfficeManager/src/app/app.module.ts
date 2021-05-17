@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
 
 const components = [
   AppComponent,
@@ -39,6 +40,7 @@ const material = [
 @NgModule({
   declarations: [
     components,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ const material = [
     BrowserAnimationsModule,
     NgbModule,
     RouterModule,
-    material
+    material,
   ],
   providers: [],
   bootstrap: [AppComponent]
