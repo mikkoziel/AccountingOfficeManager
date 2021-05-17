@@ -7,30 +7,38 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { HomeComponent } from './components/home/home.component';
+import { RouterModule } from '@angular/router';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+
 import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './register/register.component';
 
 const components = [
   AppComponent,
+  HomeComponent,
+  LoginComponent,
+  RegisterComponent
 ]
 
 const material = [
   MatSidenavModule,
   MatDividerModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatInputModule,
+  MatFormFieldModule
 ]
 
 @NgModule({
   declarations: [
     components,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +48,7 @@ const material = [
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
+    RouterModule,
     material
   ],
   providers: [],
