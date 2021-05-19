@@ -2,8 +2,17 @@
     <h1>USER PANEL</h1>
     <div class="menu_panel">
         <mat-grid-list cols="2" rowHeight="2:1">
-            <a routerLink="/work" routerLinkActive="active"><mat-grid-tile>WORK MANAGEMENET</mat-grid-tile></a>
-            <a routerLink="/clients" routerLinkActive="active"><mat-grid-tile>CLIENT MANAGEMENT</mat-grid-tile></a>
+            <div *ngIf="currentUser.type === 'User' || currentUser.type === 'Admin'">
+                <a routerLink="/work" routerLinkActive="active"><mat-grid-tile>WORK MANAGEMENET</mat-grid-tile></a>
+                <a routerLink="/clients" routerLinkActive="active"><mat-grid-tile>CLIENTS MANAGEMENT</mat-grid-tile></a>
+            </div>
+            <div *ngIf="currentUser.type === 'Admin'">
+                <a routerLink="/employees" routerLinkActive="active"><mat-grid-tile>EMPLOYEES MANAGEMENET</mat-grid-tile></a>
+            </div>
+            <div *ngIf="currentUser.type === 'Client'">
+                <a routerLink="/aocontact" routerLinkActive="active"><mat-grid-tile>ACCOUNTING OFFICE CONTACT</mat-grid-tile></a>
+                <a routerLink="/actions" routerLinkActive="active"><mat-grid-tile>ACTIONS</mat-grid-tile></a>
+            </div>
             <a routerLink="/calendar" routerLinkActive="active"><mat-grid-tile>CALENDAR</mat-grid-tile></a>
             <a routerLink="/profile" routerLinkActive="active"><mat-grid-tile>PROFILE</mat-grid-tile></a>
         </mat-grid-list>

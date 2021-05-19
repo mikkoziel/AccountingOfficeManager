@@ -25,6 +25,10 @@ import { WorkManagementComponent } from './components/work-management/work-manag
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ClientProfileComponent } from './components/client-profile/client-profile.component';
+import { ActionsComponent } from './components/actions/actions.component';
+import { AoContactComponent } from './components/ao-contact/ao-contact.component';
+import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
 
 const components = [
   AppComponent,
@@ -36,6 +40,10 @@ const components = [
   ClientManagementComponent,
   UserProfileComponent,
   CalendarComponent,
+  ClientProfileComponent,
+  ActionsComponent,
+  AoContactComponent,
+  EmployeesManagementComponent,
 ]
 
 const material = [

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ActionsComponent } from './components/actions/actions.component';
+import { AoContactComponent } from './components/ao-contact/ao-contact.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,6 +23,9 @@ const routes: Routes = [
     { path: 'clients', component: ClientManagementComponent},
     { path: 'profile', component: UserProfileComponent},
     { path: 'calendar', component: CalendarComponent},
+    { path: 'actions', component: ActionsComponent},
+    { path: 'aocontact', component: AoContactComponent},
+    { path: 'employees', component: EmployeesManagementComponent},
 ]
 
 @NgModule({
