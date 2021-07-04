@@ -13,10 +13,14 @@ export class ServerService {
 
   constructor(private http:HttpClient,) { }
 
+  login(){
+    
+  }
+
   getCurrentUser(){
     this.currentUser = <User>{
       id: 1,
-      type: "Client"
+      type: "Admin"
     }
     return this.currentUser
   }

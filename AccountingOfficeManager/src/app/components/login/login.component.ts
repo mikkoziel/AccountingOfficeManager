@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { ServerService } from '../../services/server.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +10,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   hide = true
+  login: string = ""
+  password: string = ""
+
 
   constructor(
     private router: Router,
+    private authServer: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
-  login(){
-    this.router.navigate(["/user-home"]);
+  log_in(){
+    this.authServer.login(this.login, this.password);
+    // this.router.navigate(["/user-home"]);
   }
 
 }
