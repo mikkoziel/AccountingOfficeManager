@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
+import { JwtModule } from '@auth0/angular-jwt';
+
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule} from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +31,10 @@ import { ClientProfileComponent } from './components/client-profile/client-profi
 import { ActionsComponent } from './components/actions/actions.component';
 import { AoContactComponent } from './components/ao-contact/ao-contact.component';
 import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
+
+import { CalendarModule, DateAdapter, CalendarWeekModule } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { environment } from 'src/environments/environment';
 
 const components = [
   AppComponent,
@@ -69,7 +75,18 @@ const material = [
     BrowserAnimationsModule,
     NgbModule,
     RouterModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    CalendarWeekModule,
     material,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+             return     localStorage.getItem('access_token');
+          },
+        allowedDomains: [environment.APIEndpoint],
+        disallowedRoutes: [environment.APIEndpoint + " /login"]
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
