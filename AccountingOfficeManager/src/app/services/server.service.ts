@@ -28,7 +28,7 @@ export class ServerService {
     }
 
     const header = (this.loggedIn) ? { Authorization: `Bearer ${this.token}` } : undefined;
-    console.log
+
     return this.http.request(method, this.APIEndpoint + route, {
       body: data,
       responseType: 'json',

@@ -27,7 +27,6 @@ export class AuthService {
   }
 
   login(user) {
-    console.log(user)
     if (user.username !== '' && user.password !== '' ) {
       return this.server.request('POST', '/auth/login', {
         username: user.username,
