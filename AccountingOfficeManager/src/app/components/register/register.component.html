@@ -1,21 +1,29 @@
 <div class="div_container">
-    <h1>Register</h1>
-    <form class="register-form">
-        <mat-form-field class="login-full-width">
-          <mat-label>Enter your login:</mat-label>
-          <input matInput value="">
-        </mat-form-field>
-      
-        <mat-form-field>
-            <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
-      </form>
-    <button mat-raised-button color="warn" (click)="register()">Register</button>
-    <a>Or</a>
-    <button mat-raised-button routerLink="/login" color="warn">Login</button>
- 
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
+    <h1>Sign Up</h1>
+    <p>Please enter your details</p>
+    <mat-form-field class="login-full-width">
+      <mat-label>Username:</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+  
+    <mat-form-field class="login-full-width">
+      <mat-label>First_name:</mat-label>
+      <input matInput  formControlName="first_name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    
+    <button mat-raised-button color="warn">Register</button>
+  </form>
+  <div class="login-link">
+    <button mat-raised-button routerLink="/login" color="warn">Login Here!</button>
+  </div>
+
 </div>
