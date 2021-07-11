@@ -12,10 +12,17 @@ export class ServerService {
   APIEndpoint = environment.APIEndpoint;
   currentUser: User;
 
-  private loggedIn = false;
+  private _loggedIn = false;
   private token: string;
 
   constructor(private http:HttpClient,) { }
+
+  public get loggedIn() {
+    return this._loggedIn;
+  }
+  public set loggedIn(value) {
+    this._loggedIn = value;
+  }
 
   setLoggedIn(loggedIn: boolean, token?: string) {
     this.loggedIn = loggedIn;
