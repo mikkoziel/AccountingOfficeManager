@@ -34,7 +34,8 @@
   <mat-sidenav-container class="container_class">  
     <mat-sidenav #sidenav class="sidenav_class" 
           mode="side" opened>
-      <mat-icon routerLink="/user-home">account_balance</mat-icon>
+      <mat-icon routerLink="/user-home">home</mat-icon>
+      <mat-icon a (click)="onLogout()">logout</mat-icon>
       <!-- <mat-divider></mat-divider> -->
     </mat-sidenav>
     <mat-sidenav-content>
