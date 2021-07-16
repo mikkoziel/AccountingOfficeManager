@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ServerService } from '../../services/server.service';
 
 @Component({
   selector: 'app-login',
@@ -10,21 +9,34 @@ import { ServerService } from '../../services/server.service';
 })
 export class LoginComponent implements OnInit {
   hide = true
-  login: string = ""
-  password: string = ""
-
+  form: FormGroup;
+  public loginInvalid: boolean;
+  private formSubmitAttempt: boolean;
 
   constructor(
-    private router: Router,
-    private authServer: AuthService
+    private fb: FormBuilder, 
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      username: ['', Validators.email],
+      password: ['', Validators.required]
+    });
   }
 
-  log_in(){
-    this.authServer.login(this.login, this.password);
-    // this.router.navigate(["/user-home"]);
+  async onSubmit() {
+    this.loginInvalid = false;
+    this.formSubmitAttempt = false;
+    if (this.form.valid) {
+      try {
+        await this.authService.login(this.form.value);      
+      } catch (err) {
+        this.loginInvalid = true;
+      }
+    } else {
+      this.formSubmitAttempt = true;
+    }
   }
 
 }

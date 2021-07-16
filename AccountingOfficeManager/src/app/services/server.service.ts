@@ -1,20 +1,64 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ClientCompany } from '../interfaces/clientCompany';
 import { User } from '../interfaces/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
-  httpAddress = "http://localhost:3999/user-handler";
+  APIEndpoint = environment.APIEndpoint;
   currentUser: User;
+
+  private _loggedIn = false;
+  private token: string;
 
   constructor(private http:HttpClient,) { }
 
-  login(){
-    
+  public get loggedIn() {
+    return this._loggedIn;
+  }
+  public set loggedIn(value) {
+    this._loggedIn = value;
+  }
+
+  setLoggedIn(loggedIn: boolean, token?: string) {
+    this.loggedIn = loggedIn;
+    this.token = token;
+  }
+
+  request(method: string, route: string, data?: any) {
+    if (method === 'GET') {
+      return this.get(route, data);
+    }
+
+    const header = (this.loggedIn) ? { Authorization: `Bearer ${this.token}` } : undefined;
+
+    return this.http.request(method, this.APIEndpoint + route, {
+      body: data,
+      responseType: 'json',
+      observe: 'response',
+      headers: header,
+    });
+  }
+
+  get(route: string, data?: any) {
+    const header = (this.loggedIn) ? { Authorization: `Bearer ${this.token}` } : undefined;
+
+    let params = new HttpParams();
+    if (data !== undefined) {
+      Object.getOwnPropertyNames(data).forEach(key => {
+        params = params.set(key, data[key]);
+      });
+    }
+
+    return this.http.get(this.APIEndpoint + route, {
+      responseType: 'json',
+      headers: header,
+      params
+    });
   }
 
   getCurrentUser(){

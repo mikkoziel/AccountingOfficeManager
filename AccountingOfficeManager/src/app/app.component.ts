@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Accounting Office Manager';
   isMenuCollapsed = false;
+  
+  constructor(private authService: AuthService) {}
+
+  onLogout() {
+    this.authService.logout();
+  }
 }

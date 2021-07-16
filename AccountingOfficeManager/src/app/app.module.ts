@@ -35,6 +35,7 @@ import { EmployeesManagementComponent } from './components/employees-management/
 import { CalendarModule, DateAdapter, CalendarWeekModule } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './services/auth.service';
 
 const components = [
   AppComponent,
@@ -88,7 +89,7 @@ const material = [
       }
     }),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

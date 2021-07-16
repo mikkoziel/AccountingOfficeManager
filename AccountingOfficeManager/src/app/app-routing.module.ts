@@ -12,20 +12,21 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { WorkManagementComponent } from './components/work-management/work-management.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-    { path: 'home', component: HomeComponent},
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', component: HomeComponent},
+    // { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
-    { path: 'user-home', component: UserHomeComponent},
-    { path: 'work', component: WorkManagementComponent},
-    { path: 'clients', component: ClientManagementComponent},
-    { path: 'profile', component: UserProfileComponent},
-    { path: 'calendar', component: CalendarComponent},
-    { path: 'actions', component: ActionsComponent},
-    { path: 'aocontact', component: AoContactComponent},
-    { path: 'employees', component: EmployeesManagementComponent},
+    { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
+    { path: 'work', component: WorkManagementComponent, canActivate: [AuthGuard]},
+    { path: 'clients', component: ClientManagementComponent, canActivate: [AuthGuard]},
+    { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
+    { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]},
+    { path: 'actions', component: ActionsComponent, canActivate: [AuthGuard]},
+    { path: 'aocontact', component: AoContactComponent, canActivate: [AuthGuard]},
+    { path: 'employees', component: EmployeesManagementComponent, canActivate: [AuthGuard]},
 ]
 
 @NgModule({

@@ -1,40 +1,59 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { ServerService } from './server.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-   APIEndpoint: string;
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  private token: string;
 
-  constructor(private httpClient: HttpClient) {
-     this.APIEndpoint = environment.APIEndpoint + "/authenticate";
-   }
-
-  public get loggedIn(): boolean{
-    return localStorage.getItem('access_token') !==  null;
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
   }
 
-  login(email:string, password:string) {
-    return this.httpClient.post<{access_token:  string}>(this.APIEndpoint, {email, password}).pipe(
-      tap(res => {
-        localStorage.setItem('access_token', res.access_token);
-      })
-      )
+  constructor(private router: Router, private server: ServerService) {
+    console.log('Auth Service');
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      console.log('Logged in from memory');
+      const user = JSON.parse(userData);
+      this.token = user.token;
+      this.server.setLoggedIn(true, this.token);
+      this.loggedIn.next(true);
+    }
   }
 
-  register(email:string, password:string) {
-    return this.httpClient.post<{access_token: string}>(this.APIEndpoint, {email, password}).pipe(
-      tap(res => {
-        this.login(email, password)
-      })
-    )
+  login(user) {
+    if (user.username !== '' && user.password !== '' ) {
+      return this.server.request('POST', '/auth/login', {
+        username: user.username,
+        password: user.password
+      }).subscribe((response: any) => {
+        if (response.headers.get('Authorization') !== undefined) {
+          
+          this.token = response.headers.get('Authorization');
+          this.server.setLoggedIn(true, this.token);
+          this.loggedIn.next(true);
+          const userData = {
+            token: this.token,
+          };
+          localStorage.setItem('user', JSON.stringify(userData));
+          this.router.navigateByUrl('/user-home');
+        }
+      });
+    }
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    this.server.setLoggedIn(false);
+    delete this.token;
+
+    this.loggedIn.next(false);
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 
 }
