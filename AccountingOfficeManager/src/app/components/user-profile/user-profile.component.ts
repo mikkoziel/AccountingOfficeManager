@@ -16,15 +16,16 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    try {
-      this.userService.getUserById(16).subscribe((res: User) => {
-        this.user = res;
-        this.dataSource = Object.entries(this.user); 
-        // console.log(this.user)
-      })
-    } catch (err) {
-      console.log("No user");
-    }
+    this.user = this.userService.getCurrentUser();
+    this.dataSource = Object.entries(this.user); 
+    // try {
+    //   this.userService.getUserById(16).subscribe((res: User) => {
+    //     this.user = res;
+    //     this.dataSource = Object.entries(this.user); 
+    //   })
+    // } catch (err) {
+    //   console.log("No user");
+    // }
   }
 
 }
