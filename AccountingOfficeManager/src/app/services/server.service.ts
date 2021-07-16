@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { ClientCompany } from '../interfaces/clientCompany';
-import { User } from '../interfaces/user';
+import { ClientCompany } from '../entity/clientCompany';
+import { User } from '../entity/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,9 +13,16 @@ export class ServerService {
   currentUser: User;
 
   private _loggedIn = false;
-  private token: string;
+  private _token: string;
 
   constructor(private http:HttpClient,) { }
+
+  public get token(): string {
+    return this._token;
+  }
+  public set token(value: string) {
+    this._token = value;
+  }
 
   public get loggedIn() {
     return this._loggedIn;
