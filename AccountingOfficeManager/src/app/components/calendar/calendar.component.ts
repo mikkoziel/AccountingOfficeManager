@@ -1,7 +1,7 @@
 import { Input, Component, TemplateRef, OnInit, SimpleChanges } from '@angular/core';
 // import { Time, WeekDay } from '@angular/common';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/entity/user';
 // import { addMinutes, addHours, endOfDay, startOfDay } from 'date-fns';
 
 import { ServerService } from '../../services/server.service';
