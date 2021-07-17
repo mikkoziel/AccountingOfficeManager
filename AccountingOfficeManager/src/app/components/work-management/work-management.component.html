@@ -1,3 +1,38 @@
 <div class="div_container">
-    <p>work-management works!</p>
+    <h1>YOUR WORK!</h1>
+
+    <div class="timer">
+        <div>
+            <h2>{{display}}</h2> 
+        </div>
+        <button (click)='startTimer()'>Start Timer</button>
+        <button (click)='pauseTimer()'>Pause</button>
+        <button (click)='stopTimer()'>Stop</button>
+    </div>
+
+    <table mat-table [dataSource]="worklogs" class="mat-elevation-z8">
+ 
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.worklog_id}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.date | date:'mediumDate'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start-time">
+            <th mat-header-cell *matHeaderCellDef> Start Time </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date:'shortTime'}} </td>
+          </ng-container>
+      
+        <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 </div>
