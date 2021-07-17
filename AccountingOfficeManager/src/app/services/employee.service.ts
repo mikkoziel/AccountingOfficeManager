@@ -21,6 +21,7 @@ export class EmployeeService {
           res.worklog.forEach(x=>
             worklogs.push(this.parseWorkLog(x))
           );
+          worklogs = this.sortByDate(worklogs);
           return worklogs;
         })
       );
@@ -41,7 +42,7 @@ export class EmployeeService {
   parseWorkLog(data): WorkLog{
     return <WorkLog> {
       worklog_id: data['worklog_id'],
-      date: data['date'],
+      date: new Date(data['date']),
       duration: this.convertWorklogDuration(data['duration'])
     }
   }
@@ -49,4 +50,13 @@ export class EmployeeService {
   convertWorklogDuration(dur){
     return Math.round((dur /(60 * 60) + Number.EPSILON) * 100) / 100;
   }
+
+  public sortByDate(arr): Array<WorkLog> {
+    console.log(arr)
+    arr.sort((a: WorkLog, b: WorkLog) => {
+        return b.date.getTime() - a.date.getTime();
+    });
+    console.log(arr)
+    return arr;
+}
 }
