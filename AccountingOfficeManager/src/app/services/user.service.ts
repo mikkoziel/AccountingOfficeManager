@@ -30,6 +30,14 @@ export class UserService {
     );
   }
 
+  changePassword(data){
+    return this.server.request(
+      'POST', 
+      '/user/updatePassword',
+      data
+    )
+  }
+
   parseUser(data): User{
     return <User>{
       id: data['user_id'],

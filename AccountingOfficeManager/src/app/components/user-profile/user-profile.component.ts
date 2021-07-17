@@ -47,7 +47,13 @@ export class UserProfileComponent implements OnInit {
   }
 
   changePassword(){
-    if (this.form.valid) {
+    if (this.form.valid && this.form.value.new_password == this.form.value.rep_password) {
+      this.userService.changePassword({
+          "new_password": this.form.value.new_password,
+          "old_password": this.form.value.old_password
+      }).subscribe((res:Response) => console.log(res));
+    } else {
+      console.log("Passwords doesn't match.")
     }
   }
 

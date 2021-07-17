@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    color: white !important;
+    /* color: white !important; */
 }
 .accordion {
     padding-top: 2vh;
