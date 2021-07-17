@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientCompany } from 'src/app/entity/clientCompany';
-import { ServerService } from 'src/app/services/server.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-client-management',
@@ -11,11 +11,11 @@ export class ClientManagementComponent implements OnInit {
   clients: Array<ClientCompany>
 
   constructor(
-    private serverService: ServerService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.clients = this.serverService.getClients()
+    // this.clients = this.userService.getClients()
   }
 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ServerService } from './server.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,19 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  constructor(private router: Router, private server: ServerService) {
-    console.log('Auth Service');
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      console.log('Logged in from memory');
-      const user = JSON.parse(userData);
-      this.token = user.token;
-      this.server.setLoggedIn(true, this.token);
-      this.loggedIn.next(true);
+  constructor(
+    private router: Router, 
+    private server: ServerService,
+    private userService: UserService
+    ) {
+      console.log('Auth Service');
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        console.log('Logged in from memory');
+        const user = JSON.parse(userData);
+        this.token = user.token;
+        this.server.setLoggedIn(true, this.token);
+        this.loggedIn.next(true);
     }
   }
 
@@ -40,7 +45,9 @@ export class AuthService {
           const userData = {
             token: this.token,
           };
-          localStorage.setItem('user', JSON.stringify(userData));
+          localStorage.setItem('user', JSON.stringify(userData));  
+          this.server.currentUser = this.userService.parseUser(response.body)
+          console.log(this.server.currentUser)
           this.router.navigateByUrl('/user-home');
         }
       });

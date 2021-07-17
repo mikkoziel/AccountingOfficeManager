@@ -2,14 +2,14 @@
     <h1>USER PANEL</h1>
     <div class="menu_panel">
         <mat-grid-list cols="2" rowHeight="2:1">
-            <div *ngIf="currentUser.type === 'User' || currentUser.type === 'Admin'">
+            <div *ngIf="currentUser.role === 'USER' || currentUser.role === 'ADMIN'">
                 <a routerLink="/work" routerLinkActive="active"><mat-grid-tile>WORK MANAGEMENET</mat-grid-tile></a>
                 <a routerLink="/clients" routerLinkActive="active"><mat-grid-tile>CLIENTS MANAGEMENT</mat-grid-tile></a>
             </div>
-            <div *ngIf="currentUser.type === 'Admin'">
+            <div *ngIf="currentUser.role === 'ADMIN'">
                 <a routerLink="/employees" routerLinkActive="active"><mat-grid-tile>EMPLOYEES MANAGEMENET</mat-grid-tile></a>
             </div>
-            <div *ngIf="currentUser.type === 'Client'">
+            <div *ngIf="currentUser.role === 'CLIENT'">
                 <a routerLink="/aocontact" routerLinkActive="active"><mat-grid-tile>ACCOUNTING OFFICE CONTACT</mat-grid-tile></a>
                 <a routerLink="/actions" routerLinkActive="active"><mat-grid-tile>ACTIONS</mat-grid-tile></a>
             </div>

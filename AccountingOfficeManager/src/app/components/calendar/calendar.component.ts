@@ -2,9 +2,8 @@ import { Input, Component, TemplateRef, OnInit, SimpleChanges } from '@angular/c
 // import { Time, WeekDay } from '@angular/common';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
+import { UserService } from 'src/app/services/user.service';
 // import { addMinutes, addHours, endOfDay, startOfDay } from 'date-fns';
-
-import { ServerService } from '../../services/server.service';
 
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
 		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
@@ -37,10 +36,10 @@ export class CalendarComponent implements OnInit{
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
   CalendarView = CalendarView;
 
-  constructor(private serverService: ServerService) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(){
-    this.currentUser = this.serverService.getCurrentUser();
+    this.currentUser = this.userService.getCurrentUser();
   }
 }
