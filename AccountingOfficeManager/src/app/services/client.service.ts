@@ -18,7 +18,7 @@ export class ClientService {
     return this.server.request('GET', '/client/user/' + id)
     .pipe(
       tap((res:Response) => console.log(res)),
-      map((res: any) => {
+      map((res:any) => {
         var clients = new Array<Client>();
         res.forEach(x=>
           clients.push(this.parseClient(x))

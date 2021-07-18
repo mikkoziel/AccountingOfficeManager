@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ClientManagementComponent implements OnInit {
   currentuser: User;
   clients: Array<Client>;
-  displayedColumns: string[] = ['first_name', 'last_name', 'username'];
+  displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company'];
   
   constructor(
     private userService: UserService,
