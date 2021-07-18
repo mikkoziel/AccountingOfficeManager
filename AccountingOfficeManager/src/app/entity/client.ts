@@ -1,5 +1,7 @@
-export interface Client{
-    user_id: number,
+import { ClientCompany } from "./clientCompany";
+import { User } from "./user";
+
+export interface Client extends User{
     employee_id: number,
-    company: String
+    company: ClientCompany
 }
