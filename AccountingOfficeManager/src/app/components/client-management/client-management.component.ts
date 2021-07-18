@@ -12,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export class ClientManagementComponent implements OnInit {
   currentuser: User;
   clients: Array<Client>;
-
+  displayedColumns: string[] = ['first_name', 'last_name', 'username'];
+  
   constructor(
     private userService: UserService,
     private clientService: ClientService
