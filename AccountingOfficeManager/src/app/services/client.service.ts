@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Client } from '../entity/client';
+import { ClientCompany } from '../entity/clientCompany';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -18,20 +19,31 @@ export class ClientService {
     .pipe(
       tap((res:Response) => console.log(res)),
       map((res: any) => {
-        var worklogs = new Array<Client>();
-        res.worklog.forEach(x=>
-          worklogs.push(this.parseClient(x))
+        var clients = new Array<Client>();
+        res.forEach(x=>
+          clients.push(this.parseClient(x))
         );
-        return worklogs;
+        return clients;
       })
     );
   }
 
   parseClient(data): Client{
     return <Client>{
-      user_id: data["user_id"],
+      id: data["user_id"],
       employee_id: data["employee_id"],
-      company: data["company_id"]
+      company: this.parseCompany(data["company"]),
+      first_name: data["first_name"],
+      last_name: data["last_name"],
+      username: data["username"],
+      role: data["role"],
+    }
+  }
+
+  parseCompany(data): ClientCompany{
+    return <ClientCompany>{
+      company_id: data["company_id"],
+      name: data["name"],
     }
   }
 }
