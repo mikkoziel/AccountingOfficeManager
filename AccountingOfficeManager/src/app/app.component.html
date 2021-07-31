@@ -1,7 +1,7 @@
 <div class="all">
   <div class="header" id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header">
-      <a class="navbar-brand" [routerLink]="'.'">{{title}}</a>
+      <a class="navbar-brand" (click)="routeLogo()">{{title}}</a>
       <span class="spacer"></span>
     
       <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">

@@ -24,7 +24,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
+      // console.log(this.currentUser)
     })
+  }
+
+  routeLogo(){
+    console.log(this.currentUser)
+    if(this.currentUser == null || this.currentUser == undefined){
+      this.router.navigate(['.']);
+    } else {      
+      this.router.navigate(['/user-home']);
+    }
+
   }
 
   onLogout() {

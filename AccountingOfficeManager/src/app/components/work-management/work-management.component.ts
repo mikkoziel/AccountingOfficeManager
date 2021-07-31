@@ -29,7 +29,7 @@ export class WorkManagementComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;this.employeeService.getWorkLogs(this.currentUser.id).subscribe(res=>{
-        console.log(res)
+        // console.log(res)
         this.worklogs = res;
         this.dataSource = Object.entries(this.worklogs);
       })

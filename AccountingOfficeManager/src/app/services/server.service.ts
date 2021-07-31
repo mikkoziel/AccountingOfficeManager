@@ -4,19 +4,20 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ClientCompany } from '../entity/clientCompany';
 import { User } from '../entity/user';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
   APIEndpoint = environment.APIEndpoint;
-  currentUser: Observable<User>;
+  currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
   private _loggedIn = false;
   private _token: string;
 
-  constructor(private http:HttpClient,) { }
+  constructor(private http:HttpClient,) {
+   }
 
   public get token(): string {
     return this._token;
