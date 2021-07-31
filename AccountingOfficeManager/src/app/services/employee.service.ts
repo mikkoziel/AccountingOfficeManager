@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Employee } from '../entity/employee';
 import { WorkLog } from '../entity/worklog';
+import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -11,6 +12,7 @@ export class EmployeeService {
 
   constructor(
     private server: ServerService,
+    private cService: CompanyService
     ) { }
 
   // GETTERS 
@@ -45,10 +47,10 @@ export class EmployeeService {
 
   // PARSERS AND TRANSFORMERS 
   parseEmployee(data): Employee{
-    return <Employee>{
+    return <Employee>{ 
       id: data["user_id"],
       admin_id: data["admin_id"],
-      // company: this.parseCompany(data["company"]),
+      company: this.cService.parseClientCompany(data["company"]),
       first_name: data["first_name"],
       last_name: data["last_name"],
       username: data["username"],
