@@ -20,6 +20,11 @@ export class EmployeesManagementComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.currentuser = this.userService.getCurrentUser();
+    this.eService.getEmployeesForAdmin(this.currentuser.id).subscribe(res=>{
+      console.log(res)
+      this.employees = res;
+    })
   }
 
 }
