@@ -4,13 +4,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ClientCompany } from '../entity/clientCompany';
 import { User } from '../entity/user';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
   APIEndpoint = environment.APIEndpoint;
-  currentUser: User;
+  currentUser: Observable<User>;
 
   private _loggedIn = false;
   private _token: string;

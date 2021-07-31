@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./client-management.component.css']
 })
 export class ClientManagementComponent implements OnInit {
-  currentuser: User;
+  currentUser: User;
   clients: Array<Client>;
   displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
   
@@ -20,10 +20,12 @@ export class ClientManagementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentuser = this.userService.getCurrentUser();
-    this.clientService.getClientsForEmployee(this.currentuser.id).subscribe(res=>{
-      console.log(res)
-      this.clients = res;
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+      this.clientService.getClientsForEmployee(this.currentUser.id).subscribe(res=>{
+        console.log(res)
+        this.clients = res;
+      })
     })
   }
 

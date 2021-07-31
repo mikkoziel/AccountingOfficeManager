@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { ServerService } from './server.service';
 import { UserService } from './user.service';
 
@@ -47,8 +47,8 @@ export class AuthService {
           };
           localStorage.setItem('user', JSON.stringify(userData));  
 
-          this.server.currentUser = this.userService.parseUser(response.body)
-          console.log(this.server.currentUser)
+          this.server.currentUser = of(this.userService.parseUser(response.body))
+          // console.log(this.server.currentUser)
           this.router.navigateByUrl('/user-home');
         }
       });

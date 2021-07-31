@@ -18,7 +18,7 @@ export class UserService {
     private server: ServerService,
   ) { }
 
-  getCurrentUser(): User{
+  getCurrentUser(): Observable<User>{
     return this.server.currentUser;
   }
 

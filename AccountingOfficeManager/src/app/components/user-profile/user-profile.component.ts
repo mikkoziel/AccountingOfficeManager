@@ -29,21 +29,11 @@ export class UserProfileComponent implements OnInit {
       rep_password: ['', Validators.required],
     });
 
-    this.currentUser = this.userService.getCurrentUser(); 
-    if(this.currentUser != undefined){
+    
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
       this.dataSource = Object.entries(this.currentUser);
-    }else{
-      try {
-        this.userService.getUserById(16).subscribe((res: User) => {
-          this.currentUser = res;
-          this.dataSource = Object.entries(this.currentUser); 
-        })
-      } catch (err) {
-        console.log("No user");
-      }
-    }
-    console.log(this.currentUser)
-
+    })
   }
 
   changePassword(){

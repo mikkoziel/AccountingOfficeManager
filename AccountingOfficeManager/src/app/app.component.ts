@@ -22,7 +22,9 @@ export class AppComponent implements OnInit {
 
     
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+    })
   }
 
   onLogout() {
