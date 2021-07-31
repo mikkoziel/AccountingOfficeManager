@@ -66,9 +66,9 @@ export class EmployeeService {
   parseEmployeeArray(data): Employee[] {
     var employees = new Array<Employee>();
     data.forEach(x=>{
-      console.log(x)
+      // console.log(x)
       let empl = this.checkEmployee(data, x);
-      console.log(empl)
+      // console.log(empl)
       employees.push(this.parseEmployee(empl))
     });
     return employees;
@@ -96,7 +96,7 @@ export class EmployeeService {
       "date": date,
       "duration": duration,
     }
-    console.log(data)
+    // console.log(data)
     return this.server.request('POST', '/work-log/', data)
   }
 
@@ -113,11 +113,11 @@ export class EmployeeService {
   }
 
   public sortByDate(arr): Array<WorkLog> {
-    console.log(arr)
+    // console.log(arr)
     arr.sort((a: WorkLog, b: WorkLog) => {
         return b.date.getTime() - a.date.getTime();
     });
-    console.log(arr)
+    // console.log(arr)
     return arr;
   }
 }

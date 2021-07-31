@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   routeLogo(){
-    console.log(this.currentUser)
+    // console.log(this.currentUser)
     if(this.currentUser == null || this.currentUser == undefined){
       this.router.navigate(['.']);
     } else {      

@@ -74,7 +74,7 @@ export class WorkManagementComponent implements OnInit {
 
   stopTimer() {
     this.employeeService.saveWorklog(this.date, this.time, this.currentUser.id).subscribe(res=>{
-      console.log(res);
+      // console.log(res);
     })
     clearInterval(this.interval);
     this.time = 0;
