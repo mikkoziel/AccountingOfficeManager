@@ -13,12 +13,12 @@ export class EmployeeService {
     ) { }
 
   getWorkLogs(id){
-    return this.server.request('GET', '/user/' + id)
+    return this.server.request('GET', '/work-log/user/' + id)
       .pipe(
-        // tap((res:Response) => console.log(res)),
+        tap((res:Response) => console.log(res)),
         map((res: any) => {
           var worklogs = new Array<WorkLog>();
-          res.worklog.forEach(x=>
+          res.forEach(x=>
             worklogs.push(this.parseWorkLog(x))
           );
           worklogs = this.sortByDate(worklogs);
