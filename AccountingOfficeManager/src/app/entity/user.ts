@@ -6,4 +6,5 @@ export interface User{
     last_name: string,
     username: string,
     role: string,
+    company?: Company,
 };

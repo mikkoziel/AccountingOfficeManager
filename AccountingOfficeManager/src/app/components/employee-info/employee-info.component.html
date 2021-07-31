@@ -1,1 +1,60 @@
-<p>employee-info works!</p>
+<div class="div_container">
+    <h1>EMPLOYEE PROFILE</h1>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+ 
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element[0]}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+        </ng-container>
+      
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <br />
+
+      <mat-accordion class="accordion">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Clients
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="clients" class="mat-elevation-z8 clients">
+ 
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.id}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="first_name">
+              <th mat-header-cell *matHeaderCellDef> First Name </th>
+              <td mat-cell *matCellDef="let element1"> {{element1.first_name}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="last_name">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let element1"> {{element1.last_name}} </td>
+              </ng-container>
+          
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element1"> {{element1.username}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="company">
+                <th mat-header-cell *matHeaderCellDef> Company </th>
+                <td mat-cell *matCellDef="let element1"> {{element1.company.name}} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="clientDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: clientDisplayedColumns;"></tr>
+          </table>
+      </mat-expansion-panel>  
+    </mat-accordion>
+</div>
+

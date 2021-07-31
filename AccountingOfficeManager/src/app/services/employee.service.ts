@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Employee } from '../entity/employee';
+import { Roles } from '../entity/role';
 import { WorkLog } from '../entity/worklog';
 import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
@@ -16,6 +17,16 @@ export class EmployeeService {
     ) { }
 
   // GETTERS 
+  getEmployee(id){
+    return this.server.request('GET', '/employee/' + id)
+    .pipe(
+      tap((res:Response) => console.log(res)),
+      map((res: any) => {
+        return this.parseEmployee(res);
+      })
+    );
+  }
+
   getEmployeesForAdmin(id){
     return this.server.request('GET', '/employee/admin/' + id)
     .pipe(
@@ -49,12 +60,12 @@ export class EmployeeService {
   parseEmployee(data): Employee{
     return <Employee>{ 
       id: data["user_id"],
-      admin_id: data["admin_id"],
+      admin: data["admin"],
       company: this.cService.parseClientCompany(data["company"]),
       first_name: data["first_name"],
       last_name: data["last_name"],
       username: data["username"],
-      role: data["role"],
+      role: Roles[data["roles"]]
     }
   }
 

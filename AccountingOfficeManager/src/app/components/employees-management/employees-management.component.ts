@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class EmployeesManagementComponent implements OnInit {
   currentuser: User;
   employees: Array<Employee>;
-  displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company'];
+  displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
 
   constructor(
     private userService: UserService,

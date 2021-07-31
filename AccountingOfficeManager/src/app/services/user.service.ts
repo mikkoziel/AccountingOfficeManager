@@ -4,6 +4,7 @@ import { ServerService } from 'src/app/services/server.service';
 import { User } from '../entity/user';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Roles } from '../entity/role';
 
 
 @Injectable({
@@ -44,7 +45,7 @@ export class UserService {
       first_name: data['first_name'],
       last_name: data['last_name'],
       username: data['username'],
-      role: data["roles"][0]['name']
+      role: Roles[data["roles"]]
     }
   }
 }

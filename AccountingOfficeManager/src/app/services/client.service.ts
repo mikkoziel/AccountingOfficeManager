@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Client } from '../entity/client';
 import { ClientCompany } from '../entity/clientCompany';
+import { Roles } from '../entity/role';
 import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
 
@@ -38,7 +39,7 @@ export class ClientService {
       first_name: data["first_name"],
       last_name: data["last_name"],
       username: data["username"],
-      role: data["role"],
+      role: Roles[data["roles"]],
     }
   }
 
