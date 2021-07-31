@@ -1,21 +1,84 @@
 <div class="div_container">
     <h1>YOUR CALENDAR</h1>
-    <mwl-calendar-week-view
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Previous
+          </div>
+          <div
+            class="btn btn-outline-secondary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+          >
+            Today
+          </div>
+          <div
+            class="btn btn-primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Next
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Month)"
+            [class.active]="view === CalendarView.Month"
+          >
+            Month
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Week)"
+            [class.active]="view === CalendarView.Week"
+          >
+            Week
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
         [viewDate]="viewDate"
         [events]="events"
-        [dayEndHour]="dayEndHour"
-        [excludeDays]="excludeDays"
-        [dayStartHour]="dayStartHour"
-        [hourSegments]="4"
-        [headerTemplate]="headerTemplate"
-        [tooltipTemplate]="tooltipTemplate"
-        [hourSegmentHeight]="15"
-        [eventTemplate]="eventTemplate"
-    >
-    </mwl-calendar-week-view>
+        [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen"
+        class="calendar_own"
+      >
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [events]="events"
+          [dayEndHour]="dayEndHour"
+          [dayStartHour]="dayStartHour"
+          [hourSegments]="4"
+          [hourSegmentHeight]="15"
+          class="calendar_own"
+      >
+      </mwl-calendar-week-view>
+    </div>
 </div>
 
-<ng-template #headerTemplate let-days="days" let-locale="locale"
+<!-- <ng-template #headerTemplate let-days="days" let-locale="locale"
                      let-dayClicked="dayClicked" let-eventDropped="eventDropped">
     <div class="cal-day-headers cursor-default">
       <div
@@ -33,13 +96,13 @@
           <div class="day-label text-uppercase">
               {{ day.date | calendarDate:'weekViewColumnHeader':locale }}
           </div>
-          <!-- <div class="day-number">{{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}</div>                       -->
-        </div>
+          <div class="day-number">{{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}</div>                       -->
+        <!-- </div>
       </div>
     </div>
-</ng-template>
+</ng-template> -->
 
-<ng-template #eventTemplate let-weekEvent="weekEvent" 
+<!-- <ng-template #eventTemplate let-weekEvent="weekEvent" 
                     let-locale="locale" 
                     let-eventClicked="eventClicked" 
                     let-tooltipPlacement="tooltipPlacement" 
@@ -55,21 +118,21 @@
       <div *ngIf="checkButtons(weekEvent.event.meta.group)">
         <button mat-icon-button class="event-icon" color="primary" (click)="subPoint(weekEvent.event.meta)">
           <mat-icon>remove</mat-icon>
-        </button>
+        </button> -->
         <!-- {{getUP(weekEvent.event.meta.group.group_id)}} -->
-        {{ weekEvent.event.meta.up }}
+        <!-- {{ weekEvent.event.meta.up }}
         <button mat-icon-button class="event-icon" color="primary" (click)="addPoint(weekEvent.event.meta)">
           <mat-icon>add</mat-icon>
         </button>
       </div>
     </div>
-</ng-template>
+</ng-template> -->
 
-<ng-template #tooltipTemplate let-event="event">
+<!-- <ng-template #tooltipTemplate let-event="event"> -->
   <!-- <div> -->
       <!-- <span *ngIf="event.Type == 'Examen'"><b>EXAMEN:</b><br /></span>
       <span *ngIf="event.Type == 'Herexamen'"><strong>HEREXAMEN:</strong><br /></span> -->
       <!-- {{event.title}}<span *ngIf="event.Role">, {{event.Role}}</span><br /> -->
       <!-- {{event.start | amDateFormat: 'HH:mm'}} - {{event.end | amDateFormat: 'HH:mm'}} -->
   <!-- </div> -->
-</ng-template>
+<!-- </ng-template> -->
