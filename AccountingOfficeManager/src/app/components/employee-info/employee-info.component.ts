@@ -18,7 +18,6 @@ export class EmployeeInfoComponent implements OnInit {
   employee: Employee;
 
   dataSource;
-  // displayedColumns: string[] = ['id', 'first_name', 'last_name', 'username', 'role'];
   displayedColumns: string[] = ['name', 'value'];
   clients: Array<Client>;
   clientDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'company'];
@@ -37,7 +36,7 @@ export class EmployeeInfoComponent implements OnInit {
       this.employee_id = params['id'];
       this.eService.getEmployee(this.employee_id).subscribe(res=>{
         this.employee = res;
-        this.dataSource = Object.entries(this.employee)
+        this.dataSource = Object.entries(this.employee);
         this.dataSource.splice(2,1);
         console.log(this.dataSource)
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{

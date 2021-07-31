@@ -16,8 +16,18 @@ export class ClientService {
     private cService: CompanyService
     ) { }
 
+  getClient(id){
+    return this.server.request('GET', '/user/' + id)
+    .pipe(
+      tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        return this.parseClient(res);
+      })
+    );
+
+  }
+
   getClientsForEmployee(id){
-    console.log(id)
     return this.server.request('GET', '/client/user/' + id)
     .pipe(
       tap((res:Response) => console.log(res)),

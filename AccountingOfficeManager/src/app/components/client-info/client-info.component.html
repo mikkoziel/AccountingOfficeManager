@@ -1,1 +1,17 @@
-<p>client-info works!</p>
+<div class="div_container">
+    <h1>CLIENT PROFILE</h1>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+ 
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element[0]}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+        </ng-container>
+      
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
