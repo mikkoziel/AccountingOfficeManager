@@ -20,7 +20,7 @@ export class EmployeeInfoComponent implements OnInit {
   dataSource;
   displayedColumns: string[] = ['name', 'value'];
   clients: Array<Client>;
-  clientDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'company'];
+  clientDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
   
   
   constructor(

@@ -50,6 +50,13 @@
                 <th mat-header-cell *matHeaderCellDef> Company </th>
                 <td mat-cell *matCellDef="let element1"> {{element1.company.name}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="info">
+                <th mat-header-cell *matHeaderCellDef> More Info </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button mat-raised-button routerLink="/clients/{{element.id}} " color="warn">More Info</button>
+                </td>
+            </ng-container>
     
             <tr mat-header-row *matHeaderRowDef="clientDisplayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: clientDisplayedColumns;"></tr>
