@@ -6,6 +6,7 @@ import { Employee } from 'src/app/entity/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Client } from 'src/app/entity/client';
 import { ClientService } from 'src/app/services/client.service';
+import { Roles } from 'src/app/entity/role';
 
 @Component({
   selector: 'app-employee-info',
@@ -19,9 +20,12 @@ export class EmployeeInfoComponent implements OnInit {
 
   dataSource;
   displayedColumns: string[] = ['name', 'value'];
+  
   clients: Array<Client>;
   clientDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
   
+  employees: Array<Employee>;
+  employeeDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'info'];
   
   constructor(
     private userService: UserService,
@@ -40,6 +44,10 @@ export class EmployeeInfoComponent implements OnInit {
         this.dataSource.splice(2,1);
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
           this.clients = res;
+        })
+        this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
+          // console.log(res)
+          this.employees = res;
         })
       })
     });

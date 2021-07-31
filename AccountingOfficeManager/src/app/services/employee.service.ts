@@ -3,7 +3,7 @@ import { map, tap } from 'rxjs/operators';
 import { Employee } from '../entity/employee';
 import { Roles } from '../entity/role';
 import { WorkLog } from '../entity/worklog';
-import { getRole } from '../utils/utils';
+import { findInDictAfterCirc, getRole } from '../utils/utils';
 import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
 
@@ -31,13 +31,9 @@ export class EmployeeService {
   getEmployeesForAdmin(id){
     return this.server.request('GET', '/employee/admin/' + id)
     .pipe(
-      // tap((res:Response) => console.log(res)),
+      tap((res:Response) => console.log(res)),
       map((res: any) => {
-        var employees = new Array<Employee>();
-        res.forEach(x=>
-          employees.push(this.parseEmployee(x))
-        );
-        return employees;
+        return this.parseEmployeeArray(res)
       })
     );
   }
@@ -58,8 +54,29 @@ export class EmployeeService {
   }
 
   // PARSERS AND TRANSFORMERS 
+
+  checkEmployee(data, empl){
+    if(empl.constructor == Object){
+      return empl
+    } else {
+      return findInDictAfterCirc(data, "user_id", empl)
+    }
+  }
+
+  parseEmployeeArray(data): Employee[] {
+    var employees = new Array<Employee>();
+    data.forEach(x=>{
+      console.log(x)
+      let empl = this.checkEmployee(data, x);
+      console.log(empl)
+      employees.push(this.parseEmployee(empl))
+    });
+    return employees;
+
+  }
+
   parseEmployee(data): Employee{
-    let role_check = getRole(data["roles"][0])
+    let role_check = getRole(data["roles"])
     return <Employee>{ 
       id: data["user_id"],
       admin: data["admin"],

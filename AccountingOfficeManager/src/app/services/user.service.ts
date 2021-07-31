@@ -5,7 +5,7 @@ import { User } from '../entity/user';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Roles } from '../entity/role';
-import { findInJsonAfterCirc, getRole } from '../utils/utils';
+import { getRole } from '../utils/utils';
 
 
 @Injectable({
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   parseUser(data): User{
-    let role_check = getRole(data["roles"][0])
+    let role_check = getRole(data["roles"])
       return <User>{
         id: data['user_id'],
         first_name: data['first_name'],

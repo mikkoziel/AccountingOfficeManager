@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/entity/client';
 import { User } from 'src/app/entity/user';
+import { Document } from 'src/app/entity/document';
 import { ClientService } from 'src/app/services/client.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,6 +18,9 @@ export class ClientInfoComponent implements OnInit {
 
   dataSource;
   displayedColumns: string[] = ['name', 'value'];
+
+  documents: Array<Document>
+  docDisplayedColumns: string[] = ['id', 'description', 'download'];
 
   constructor(
     private userService: UserService,
@@ -39,6 +43,9 @@ export class ClientInfoComponent implements OnInit {
           Employee: this.client.employee_id,
           Role: this.client.role
         });
+      })
+      this.clientService.getDocumentForClient(this.client_id).subscribe(res=>{
+        this.documents = res;
       })
     })
   }

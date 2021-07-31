@@ -1,28 +1,41 @@
 import { Roles } from "../entity/role";
 
-export function findInJsonAfterCirc(data, search_key, search_value){
-    for(let key in data){
-        let value = data[key];
+export function findInDictAfterCirc(data, search_key, search_value){
+    let ret = undefined
+    let flag = false
 
-        console.log(key+ ': ' + value)
-        if(value == null){
-        } else {
+    finder(null, data)
+
+    function finder(key, value){
+        // console.log(key+ ': ' + value)
+        if(value != null){
+            if(key == search_key && value == search_value){
+                flag = true
+                return
+            }
             if(isArray(value)){
-                for(let element in value){
-                    return findInJsonAfterCirc(value[element], search_key, search_value)
+                // console.log("array")
+                for(let param_key in value){
+                    finder(param_key, value[param_key])
                 }
-            } else {
-                if(value.constructor == Object){
-                    return findInJsonAfterCirc(value, search_key, search_value)
-                } else{
-                    if(key == search_key && value == search_value){
-                        console.log(data)
-                        return data;
-                    }
+                return
+            } 
+            if(value.constructor == Object){
+                // console.log("object")
+                for(let param_key in value){
+                    finder(param_key, value[param_key])
                 }
+                if(flag){
+                    ret = value
+                    flag = false;
+                }
+                return
+            
             }
         }
     }
+    // }
+    return ret
 }
 
 function isArray(what) {
@@ -34,9 +47,9 @@ export function getRole(role){
         return "undefined"
     } else {
         if(role.constructor == Object){
-            return Roles[role["role_id"]]
+            return Roles[role[0]["role_id"]]
         } else {
-            return Roles[role]
+            return Roles[role[0]]
         }
     }
 }
