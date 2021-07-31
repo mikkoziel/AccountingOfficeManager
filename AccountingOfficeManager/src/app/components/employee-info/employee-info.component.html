@@ -61,7 +61,7 @@
 
       <br />
 
-      <mat-accordion class="accordion">
+      <mat-accordion *ngIf="employee.role=='ADMIN' || employee.role=='AO_ADMIN'" class="accordion">
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>

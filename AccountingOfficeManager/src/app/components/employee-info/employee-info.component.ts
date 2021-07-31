@@ -46,7 +46,6 @@ export class EmployeeInfoComponent implements OnInit {
           this.clients = res;
         })
         this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
-          // console.log(res)
           this.employees = res;
         })
       })
