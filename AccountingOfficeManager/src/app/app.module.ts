@@ -39,6 +39,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
+import { ClientInfoComponent } from './components/client-info/client-info.component';
 
 const components = [
   AppComponent,
@@ -55,6 +56,7 @@ const components = [
   AoContactComponent,
   EmployeesManagementComponent,
   EmployeeInfoComponent,
+  ClientInfoComponent,
 ]
 
 const material = [

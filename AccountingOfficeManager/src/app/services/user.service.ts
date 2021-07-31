@@ -5,6 +5,7 @@ import { User } from '../entity/user';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Roles } from '../entity/role';
+import { getRole } from '../utils/utils';
 
 
 @Injectable({
@@ -40,12 +41,27 @@ export class UserService {
   }
 
   parseUser(data): User{
-    return <User>{
-      id: data['user_id'],
-      first_name: data['first_name'],
-      last_name: data['last_name'],
-      username: data['username'],
-      role: Roles[data["roles"]]
-    }
+    let role_check = getRole(data["roles"])
+      return <User>{
+        id: data['user_id'],
+        first_name: data['first_name'],
+        last_name: data['last_name'],
+        username: data['username'],
+        role: role_check
+      }   
   }
+
+  find(array, string) {
+    return array.reduce((r, o) => {
+        if (Object.values(o).some(v => v === string)) {
+            r.push(o);
+            return r;
+        }
+        if (Array.isArray(o.subNames)) {
+            var subNames = this.find(o.subNames, string);
+            if (subNames.length) r.push(Object.assign({}, o, { subNames }));
+        }
+        return r;
+    }, []);
+}
 }

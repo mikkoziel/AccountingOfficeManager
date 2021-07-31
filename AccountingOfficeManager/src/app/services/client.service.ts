@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Client } from '../entity/client';
-import { ClientCompany } from '../entity/clientCompany';
-import { Roles } from '../entity/role';
+import { Document } from '../entity/document';
+import { getRole } from '../utils/utils';
 import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
 
@@ -16,11 +16,21 @@ export class ClientService {
     private cService: CompanyService
     ) { }
 
-  getClientsForEmployee(id){
-    console.log(id)
-    return this.server.request('GET', '/client/user/' + id)
+  getClient(id){
+    return this.server.request('GET', '/user/' + id)
     .pipe(
       tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        return this.parseClient(res);
+      })
+    );
+
+  }
+
+  getClientsForEmployee(id){
+    return this.server.request('GET', '/client/user/' + id)
+    .pipe(
+      // tap((res:Response) => console.log(res)),
       map((res:any) => {
         var clients = new Array<Client>();
         res.forEach(x=>
@@ -31,15 +41,39 @@ export class ClientService {
     );
   }
 
+  getDocumentForClient(id){
+    return this.server.request('GET', '/document/user/' + id)
+    .pipe(
+      // tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        var documents = new Array<Document>();
+        res.forEach(x=>
+          documents.push(this.parseDocument(x))
+        );
+        return documents;
+      })
+    );
+    
+  }
+
   parseClient(data): Client{
-    return <Client>{
-      id: data["user_id"],
-      employee_id: data["employee_id"],
-      company: this.cService.parseClientCompany(data["company"]),
-      first_name: data["first_name"],
-      last_name: data["last_name"],
-      username: data["username"],
-      role: Roles[data["roles"]],
+    let role_check = getRole(data["roles"])
+      return <Client>{
+        id: data["user_id"],
+        employee_id: data["employee"],
+        company: this.cService.parseClientCompany(data["company"]),
+        first_name: data["first_name"],
+        last_name: data["last_name"],
+        username: data["username"],
+        role: role_check,
+      }
+  }
+
+  parseDocument(data): Document{
+    return <Document>{
+      document_id: data["document_id"],
+      path: data["path"],
+      description: data["description"]
     }
   }
 

@@ -6,6 +6,7 @@ import { Employee } from 'src/app/entity/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Client } from 'src/app/entity/client';
 import { ClientService } from 'src/app/services/client.service';
+import { Roles } from 'src/app/entity/role';
 
 @Component({
   selector: 'app-employee-info',
@@ -18,11 +19,13 @@ export class EmployeeInfoComponent implements OnInit {
   employee: Employee;
 
   dataSource;
-  // displayedColumns: string[] = ['id', 'first_name', 'last_name', 'username', 'role'];
   displayedColumns: string[] = ['name', 'value'];
-  clients: Array<Client>;
-  clientDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'company'];
   
+  clients: Array<Client>;
+  clientDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
+  
+  employees: Array<Employee>;
+  employeeDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'info'];
   
   constructor(
     private userService: UserService,
@@ -37,13 +40,13 @@ export class EmployeeInfoComponent implements OnInit {
       this.employee_id = params['id'];
       this.eService.getEmployee(this.employee_id).subscribe(res=>{
         this.employee = res;
-        this.dataSource = Object.entries(this.employee)
+        this.dataSource = Object.entries(this.employee);
         this.dataSource.splice(2,1);
-        console.log(this.dataSource)
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
-          console.log(res)
           this.clients = res;
-          console.log(this.clients);
+        })
+        this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
+          this.employees = res;
         })
       })
     });
