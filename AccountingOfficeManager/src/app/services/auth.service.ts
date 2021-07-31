@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { ServerService } from './server.service';
 import { UserService } from './user.service';
 
@@ -20,7 +20,7 @@ export class AuthService {
     private server: ServerService,
     private userService: UserService
     ) {
-      console.log('Auth Service');
+      // console.log('Auth Service');
       const userData = localStorage.getItem('user');
       if (userData) {
         console.log('Logged in from memory');
@@ -47,8 +47,8 @@ export class AuthService {
           };
           localStorage.setItem('user', JSON.stringify(userData));  
 
-          this.server.currentUser = this.userService.parseUser(response.body)
-          console.log(this.server.currentUser)
+          this.server.currentUser.next(this.userService.parseUser(response.body))
+          // console.log(this.server.currentUser)
           this.router.navigateByUrl('/user-home');
         }
       });
@@ -60,6 +60,7 @@ export class AuthService {
     delete this.token;
 
     this.loggedIn.next(false);
+    this.server.currentUser.next(null);
     localStorage.clear();
     this.router.navigate(['/']);
   }

@@ -14,7 +14,7 @@ import { Roles } from 'src/app/entity/role';
   styleUrls: ['./employee-info.component.css']
 })
 export class EmployeeInfoComponent implements OnInit {
-  currentuser: User;
+  currentUser: User;
   employee_id: number;
   employee: Employee;
 
@@ -35,7 +35,9 @@ export class EmployeeInfoComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.currentuser = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+    })
     this.route.params.subscribe(params => {
       this.employee_id = params['id'];
       this.eService.getEmployee(this.employee_id).subscribe(res=>{

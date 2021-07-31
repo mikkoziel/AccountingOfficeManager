@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./employees-management.component.css']
 })
 export class EmployeesManagementComponent implements OnInit {
-  currentuser: User;
+  currentUser: User;
   employees: Array<Employee>;
   displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
 
@@ -20,10 +20,12 @@ export class EmployeesManagementComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.currentuser = this.userService.getCurrentUser();
-    this.eService.getEmployeesForAdmin(this.currentuser.id).subscribe(res=>{
-      // console.log(res)
-      this.employees = res;
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+      this.eService.getEmployeesForAdmin(this.currentUser.id).subscribe(res=>{
+        // console.log(res)
+        this.employees = res;
+      })
     })
   }
 

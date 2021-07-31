@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./client-info.component.css']
 })
 export class ClientInfoComponent implements OnInit {
-  currentuser: User;
+  currentUser: User;
   client_id: number;
   client: Client;
 
@@ -29,7 +29,9 @@ export class ClientInfoComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.currentuser = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+    })
     this.route.params.subscribe(params => {
       this.client_id = params['id'];
       this.clientService.getClient(this.client_id).subscribe(res =>{

@@ -10,10 +10,14 @@ import { UserService } from 'src/app/services/user.service';
 export class UserHomeComponent implements OnInit {
   currentUser: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) { 
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+      // console.log(this.currentUser)
+    })
+  }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getCurrentUser();
   }
 
 }

@@ -42,7 +42,9 @@ export class CalendarComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.currentUser = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().subscribe(user =>{
+      this.currentUser = user;
+    })
   }
 
   closeOpenMonthViewDay() {
