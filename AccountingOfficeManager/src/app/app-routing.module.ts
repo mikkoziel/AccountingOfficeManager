@@ -4,6 +4,7 @@ import { ActionsComponent } from './components/actions/actions.component';
 import { AoContactComponent } from './components/ao-contact/ao-contact.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
 
 import { HomeComponent } from './components/home/home.component';
@@ -27,6 +28,8 @@ const routes: Routes = [
     { path: 'actions', component: ActionsComponent, canActivate: [AuthGuard]},
     { path: 'aocontact', component: AoContactComponent, canActivate: [AuthGuard]},
     { path: 'employees', component: EmployeesManagementComponent, canActivate: [AuthGuard]},
+    { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [AuthGuard]},
+
 ]
 
 @NgModule({
