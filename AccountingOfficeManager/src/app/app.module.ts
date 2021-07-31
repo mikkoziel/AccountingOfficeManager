@@ -34,12 +34,13 @@ import { ActionsComponent } from './components/actions/actions.component';
 import { AoContactComponent } from './components/ao-contact/ao-contact.component';
 import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
 
-import { CalendarModule, DateAdapter, CalendarWeekModule } from 'angular-calendar';
+import { CalendarModule, DateAdapter, CalendarCommonModule } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const components = [
   AppComponent,
@@ -85,7 +86,6 @@ const material = [
     NgbModule,
     RouterModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    CalendarWeekModule,
     material,
     JwtModule.forRoot({
       config: {
@@ -98,6 +98,7 @@ const material = [
     }),
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas :[CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

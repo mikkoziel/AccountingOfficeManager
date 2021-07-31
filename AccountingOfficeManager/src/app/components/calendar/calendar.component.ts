@@ -1,4 +1,4 @@
-import { Input, Component, TemplateRef, OnInit, SimpleChanges } from '@angular/core';
+import { Input, Component, TemplateRef, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 // import { Time, WeekDay } from '@angular/common';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
@@ -18,28 +18,38 @@ var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
 
 @Component({
   selector: 'app-calendar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit{
-  @Input() data: any;
   currentUser: User;
   
   view: CalendarView = CalendarView.Week;
-  viewDate: Date = new Date('2016-01-04 00:00');
-  dayStartHour: number = 8;
-  dayEndHour: number = 22;
+  viewDate: Date = new Date();
+  dayStartHour: number = 5;
+  dayEndHour: number = 24;
 
   events: CalendarEvent[] = [];
 
   excludeDays: number[] = [0, 6];
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
   CalendarView = CalendarView;
+  
+  activeDayIsOpen: boolean = true;
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(){
     this.currentUser = this.userService.getCurrentUser();
+  }
+
+  closeOpenMonthViewDay() {
+    this.activeDayIsOpen = false;
+  }
+  
+  setView(view: CalendarView) {
+    this.view = view;
   }
 }
