@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ActionsComponent } from './components/actions/actions.component';
 import { AoContactComponent } from './components/ao-contact/ao-contact.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
     { path: 'work', component: WorkManagementComponent, canActivate: [AuthGuard]},
     { path: 'clients', component: ClientManagementComponent, canActivate: [AuthGuard]},
+    { path: 'clients/:id', component: ClientInfoComponent, canActivate: [AuthGuard]},
     { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
     { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]},
     { path: 'actions', component: ActionsComponent, canActivate: [AuthGuard]},

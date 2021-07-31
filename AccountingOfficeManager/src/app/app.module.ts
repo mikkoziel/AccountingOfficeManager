@@ -56,6 +56,7 @@ const components = [
   AoContactComponent,
   EmployeesManagementComponent,
   EmployeeInfoComponent,
+  ClientInfoComponent,
 ]
 
 const material = [
@@ -73,7 +74,6 @@ const material = [
 @NgModule({
   declarations: [
     components,
-    ClientInfoComponent,
   ],
   imports: [
     BrowserModule,
