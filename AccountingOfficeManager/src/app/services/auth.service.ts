@@ -46,6 +46,7 @@ export class AuthService {
             token: this.token,
           };
           localStorage.setItem('user', JSON.stringify(userData));  
+
           this.server.currentUser = this.userService.parseUser(response.body)
           console.log(this.server.currentUser)
           this.router.navigateByUrl('/user-home');

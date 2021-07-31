@@ -38,11 +38,8 @@ export class EmployeeInfoComponent implements OnInit {
         this.employee = res;
         this.dataSource = Object.entries(this.employee);
         this.dataSource.splice(2,1);
-        console.log(this.dataSource)
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
-          console.log(res)
           this.clients = res;
-          console.log(this.clients);
         })
       })
     });

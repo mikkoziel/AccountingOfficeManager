@@ -30,8 +30,15 @@ export class ClientInfoComponent implements OnInit {
       this.client_id = params['id'];
       this.clientService.getClient(this.client_id).subscribe(res =>{
         this.client = res;
-        this.dataSource = Object.entries(this.client);
-
+        this.dataSource = Object.entries({
+          ID: this.client.id,
+          FirstName: this.client.first_name,
+          LastName: this.client.last_name,
+          Username: this.client.username,
+          Company: this.client.company.name,
+          Employee: this.client.employee_id,
+          Role: this.client.role
+        });
       })
     })
   }
