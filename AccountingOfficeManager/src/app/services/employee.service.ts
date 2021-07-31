@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
+import { Employee } from '../entity/employee';
+import { Roles } from '../entity/role';
 import { WorkLog } from '../entity/worklog';
+import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -10,12 +13,38 @@ export class EmployeeService {
 
   constructor(
     private server: ServerService,
+    private cService: CompanyService
     ) { }
+
+  // GETTERS 
+  getEmployee(id){
+    return this.server.request('GET', '/employee/' + id)
+    .pipe(
+      tap((res:Response) => console.log(res)),
+      map((res: any) => {
+        return this.parseEmployee(res);
+      })
+    );
+  }
+
+  getEmployeesForAdmin(id){
+    return this.server.request('GET', '/employee/admin/' + id)
+    .pipe(
+      tap((res:Response) => console.log(res)),
+      map((res: any) => {
+        var employees = new Array<Employee>();
+        res.forEach(x=>
+          employees.push(this.parseEmployee(x))
+        );
+        return employees;
+      })
+    );
+  }
 
   getWorkLogs(id){
     return this.server.request('GET', '/work-log/user/' + id)
       .pipe(
-        tap((res:Response) => console.log(res)),
+        // tap((res:Response) => console.log(res)),
         map((res: any) => {
           var worklogs = new Array<WorkLog>();
           res.forEach(x=>
@@ -25,6 +54,19 @@ export class EmployeeService {
           return worklogs;
         })
       );
+  }
+
+  // PARSERS AND TRANSFORMERS 
+  parseEmployee(data): Employee{
+    return <Employee>{ 
+      id: data["user_id"],
+      admin: data["admin"],
+      company: this.cService.parseClientCompany(data["company"]),
+      first_name: data["first_name"],
+      last_name: data["last_name"],
+      username: data["username"],
+      role: Roles[data["roles"]]
+    }
   }
 
   saveWorklog(date, duration, user_id){
@@ -58,5 +100,5 @@ export class EmployeeService {
     });
     console.log(arr)
     return arr;
-}
+  }
 }
