@@ -38,6 +38,7 @@ import { CalendarModule, DateAdapter, CalendarWeekModule } from 'angular-calenda
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
+import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 
 const components = [
   AppComponent,
@@ -53,6 +54,7 @@ const components = [
   ActionsComponent,
   AoContactComponent,
   EmployeesManagementComponent,
+  EmployeeInfoComponent,
 ]
 
 const material = [
