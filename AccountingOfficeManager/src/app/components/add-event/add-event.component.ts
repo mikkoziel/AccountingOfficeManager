@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
+import { createFalse } from 'typescript';
 import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
@@ -31,7 +32,7 @@ export class AddEventComponent implements OnInit {
       start_date: ['', Validators.required],
       end_date: ['', Validators.required],
       title: ['', Validators.required],
-      all_day: ['', Validators.required]
+      all_day: [false, Validators.required]
     });
   }
 
@@ -42,7 +43,9 @@ export class AddEventComponent implements OnInit {
       this.form.value["end_date"],
       this.form.value["title"],
       this.form.value["all_day"],
-    );
+    ).subscribe(x=>{
+      console.log("UMPA LUMPAS")
+    })
   }
 
   onNoClick(): void {
