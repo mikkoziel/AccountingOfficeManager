@@ -51,7 +51,9 @@ export class CalendarComponent implements OnInit{
   ngOnInit(){
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
-      this.calendarService.getCalendarForUser(user.id).subscribe(result=>{
+      console.log(user)
+      this.calendarService.getCalendarForUser(this.currentUser.id).subscribe(result=>{
+        console.log(result)
         result.forEach(x=>{
           this.events.push(
             <CalendarEvent>{
