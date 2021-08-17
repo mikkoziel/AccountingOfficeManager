@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 // import { Time, WeekDay } from '@angular/common';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
+import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
 import { AddEventComponent } from '../add-event/add-event.component';
 // import { addMinutes, addHours, endOfDay, startOfDay } from 'date-fns';
@@ -42,12 +43,26 @@ export class CalendarComponent implements OnInit{
 
   constructor(
     private userService: UserService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private calendarService: CalendarService
+    ) {
   }
 
   ngOnInit(){
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
+      this.calendarService.getCalendarForUser(user.id).subscribe(result=>{
+        result.forEach(x=>{
+          this.events.push(
+            <CalendarEvent>{
+              start: x.start_date,
+              end: x.end_date,
+              title: x.title,
+              allDay: x.all_day
+            }
+          )
+        })
+      })
     })
   }
 
@@ -67,7 +82,6 @@ export class CalendarComponent implements OnInit{
     
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 }
