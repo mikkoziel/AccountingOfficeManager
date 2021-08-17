@@ -1,8 +1,10 @@
 import { Input, Component, TemplateRef, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 // import { Time, WeekDay } from '@angular/common';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
 import { UserService } from 'src/app/services/user.service';
+import { AddEventComponent } from '../add-event/add-event.component';
 // import { addMinutes, addHours, endOfDay, startOfDay } from 'date-fns';
 
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
@@ -38,7 +40,9 @@ export class CalendarComponent implements OnInit{
   
   activeDayIsOpen: boolean = true;
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(){
@@ -53,5 +57,17 @@ export class CalendarComponent implements OnInit{
   
   setView(view: CalendarView) {
     this.view = view;
+  }
+
+  openAddEvent(){
+    let dialogRef = this.dialog.open(AddEventComponent, {
+      height: '400px',
+      width: '600px',
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 }

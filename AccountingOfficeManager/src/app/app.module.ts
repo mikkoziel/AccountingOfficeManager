@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -41,6 +42,7 @@ import { AuthService } from './services/auth.service';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AddEventComponent } from './components/add-event/add-event.component';
 
 const components = [
   AppComponent,
@@ -70,11 +72,13 @@ const material = [
   MatGridListModule,
   MatTableModule,
   MatExpansionModule,
+  MatDialogModule,
 ]
 
 @NgModule({
   declarations: [
     components,
+    AddEventComponent,
   ],
   imports: [
     BrowserModule,
