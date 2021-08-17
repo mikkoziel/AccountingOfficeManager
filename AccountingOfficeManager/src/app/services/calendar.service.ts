@@ -26,6 +26,17 @@ export class CalendarService {
     );
   }
 
+  saveCalendarEvent(user_id, start_date, end_date, title, all_day){
+    var data = {
+      "user_id": user_id,
+      "start_date": start_date,
+      "end_date": end_date,
+      "title": title,
+      "all_day": all_day
+    }
+    return this.server.request('POST', '/calendar/', data)
+  }
+
   parseCalendar(data): Calendar{
     return <Calendar>{
       calendar_id: data['calendar_id'],
