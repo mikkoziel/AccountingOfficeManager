@@ -38,6 +38,20 @@ export class CompanyService {
     return this.server.request('POST', '/cc/register', pum)
   }
 
+  getCCForAO(id){
+    return this.server.request('GET', '/cc/ao/' + id)
+    .pipe(
+      // tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        var clients = new Array<ClientCompany>();
+        res.forEach(x=>
+          clients.push(this.parseClientCompany(x))
+        );
+        return clients;
+      })
+    );
+  }
+
   parseClientCompany(data): ClientCompany{
       return <ClientCompany>{
         company_id: data["company_id"],
