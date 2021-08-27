@@ -43,13 +43,24 @@ function isArray(what) {
 }
 
 export function getRole(role){
+    // console.log(role)
     if(role == undefined){
         return "undefined"
     } else {
         if(role.constructor == Object){
-            return Roles[role[0]["role_id"]]
+            // console.log("ttu")
+            return Roles[role["role_id"]]
         } else {
-            return Roles[role[0]]
+            if(Array.isArray(role)){
+                let role_array = []
+                role.forEach(x=>{
+                    role_array.push(getRole(x))
+                })                
+                return role_array[0]
+            }else{
+                // console.log("iudh")
+                return Roles[role[0]]
+            }
         }
     }
 }
