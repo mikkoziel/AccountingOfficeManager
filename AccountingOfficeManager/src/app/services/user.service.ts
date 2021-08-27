@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Roles } from '../entity/role';
 import { getRole } from '../utils/utils';
+import { AO } from '../entity/ao';
 
 
 @Injectable({
@@ -63,5 +64,29 @@ export class UserService {
         }
         return r;
     }, []);
+  }
+
+  registerUserAndAO(data){
+    return this.server.request('POST', '/ao/register', {
+      ao:{
+        name: data["ao_name"]
+      },
+      employee:{
+        username: data['username'],
+        first_name: data['first_name'],
+        last_name: data['last_name'],
+        password: data['password'],
+        roles:[
+          {role_id:4}
+        ]
+      }
+    })
+  }
+
+  parseAO(data): AO{
+    return <AO>{
+      company_id: data["company_id"],
+      name: data["name"],
+    }
 }
 }

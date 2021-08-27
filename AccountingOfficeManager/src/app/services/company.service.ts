@@ -29,6 +29,15 @@ export class CompanyService {
     
   }
 
+  registerCC(data){
+    let pum = {
+      cc: {name: data["name"]},
+      id: data["id"]
+    }
+    console.log(pum)
+    return this.server.request('POST', '/cc/register', pum)
+  }
+
   parseClientCompany(data): ClientCompany{
       return <ClientCompany>{
         company_id: data["company_id"],

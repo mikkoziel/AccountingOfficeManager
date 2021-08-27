@@ -10,6 +10,7 @@ import { EmployeesManagementComponent } from './components/employees-management/
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterCcComponent } from './components/register-cc/register-cc.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -31,6 +32,8 @@ const routes: Routes = [
     { path: 'aocontact', component: AoContactComponent, canActivate: [AuthGuard]},
     { path: 'employees', component: EmployeesManagementComponent, canActivate: [AuthGuard]},
     { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [AuthGuard]},
+    { path: 'register-cc', component: RegisterCcComponent, canActivate: [AuthGuard]},
+  
 
 ]
 

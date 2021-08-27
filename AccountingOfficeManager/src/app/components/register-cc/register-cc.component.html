@@ -1,0 +1,12 @@
+<div class="div_container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
+      <h1>Register Client Company</h1>
+      <p>Please enter details</p>
+      <mat-form-field class="login-full-width">
+        <mat-label>Name:</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+          
+      <button mat-raised-button color="warn">Register</button>
+    </form>  
+  </div>
