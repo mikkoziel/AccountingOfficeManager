@@ -8,6 +8,7 @@
             </div>
             <div *ngIf="currentUser?.role === 'ADMIN' || currentUser?.role === 'AO_ADMIN'">
                 <a routerLink="/employees" routerLinkActive="active"><mat-grid-tile>EMPLOYEES MANAGEMENET</mat-grid-tile></a>
+                <a routerLink="/companies" routerLinkActive="active"><mat-grid-tile>CLIENT COMPANIES MANAGEMENT</mat-grid-tile></a>
                 <a routerLink="/register-cc" routerLinkActive="active"><mat-grid-tile>ADD CLIENT COMPANY</mat-grid-tile></a>
             </div>
             <div *ngIf="currentUser?.role === 'CLIENT'">
