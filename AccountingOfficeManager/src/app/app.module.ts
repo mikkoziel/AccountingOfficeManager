@@ -44,7 +44,7 @@ import { EmployeeInfoComponent } from './components/employee-info/employee-info.
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AddEventComponent } from './components/add-event/add-event.component';
-import { RegisterCcComponent } from './register-cc/register-cc.component';
+import { RegisterCcComponent } from './components/register-cc/register-cc.component';
 
 const components = [
   AppComponent,
