@@ -69,38 +69,4 @@ export class ServerService {
       params
     });
   }
-
-  // getCurrentUser(){
-  //   this.currentUser = <User>{
-  //     id: 1,
-  //     type: "Admin"
-  //   }
-  //   return this.currentUser
-  // }
-
-  // getClients(){
-  //   let clients = [
-  //     <ClientCompany>{
-  //       id: 1,
-  //       name: "Facebook"
-  //     },
-  //     <ClientCompany>{
-  //       id: 2,
-  //       name: "Google"
-  //     },
-  //     <ClientCompany>{
-  //       id: 3,
-  //       name: "Microsoft"
-  //     },
-  //     <ClientCompany>{
-  //       id: 4,
-  //       name: "Volkwagen"
-  //     },
-  //     <ClientCompany>{
-  //       id: 5,
-  //       name: "BMW"
-  //     },
-  //   ]
-  //   return clients;
-  // }
 }
