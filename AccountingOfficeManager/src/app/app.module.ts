@@ -46,6 +46,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { RegisterCcComponent } from './components/register-cc/register-cc.component';
 import { CompaniesManagementComponent } from './components/companies-management/companies-management.component';
+import { CompanyInfoComponent } from './components/company-info/company-info.component';
 
 const components = [
   AppComponent,
@@ -85,6 +86,7 @@ const material = [
     AddEventComponent,
     RegisterCcComponent,
     CompaniesManagementComponent,
+    CompanyInfoComponent,
   ],
   imports: [
     BrowserModule,
