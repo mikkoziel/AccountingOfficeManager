@@ -41,6 +41,20 @@ export class ClientService {
     );
   }
 
+  getClientsForCompany(id){
+    return this.server.request('GET', '/client/cc/' + id)
+    .pipe(
+      // tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        var clients = new Array<Client>();
+        res.forEach(x=>
+          clients.push(this.parseClient(x))
+        );
+        return clients;
+      })
+    );
+  }
+
   getDocumentForClient(id){
     return this.server.request('GET', '/document/user/' + id)
     .pipe(

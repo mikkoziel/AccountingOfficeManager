@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ClientCompany } from '../entity/clientCompany';
+import { Company } from '../entity/company';
 import { Document } from '../entity/document';
 import { ServerService } from './server.service';
 
@@ -12,6 +13,14 @@ export class CompanyService {
   constructor(
     private server: ServerService,
     ) { }
+
+  getCompany(id){
+    return this.server.request('GET', '/company/' + id)
+    .pipe(
+      tap((res:any)=> console.log(res)),
+      map((res:any)=> {return this.parseCompany(res)})
+    )
+  }
 
   
   getDocumentForCompany(id){
@@ -50,6 +59,13 @@ export class CompanyService {
         return clients;
       })
     );
+  }
+
+  parseCompany(data): Company{
+    return <Company>{
+      company_id: data["company_id"],
+      name: data["name"],
+    }
   }
 
   parseClientCompany(data): ClientCompany{
