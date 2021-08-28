@@ -19,16 +19,47 @@ export class ClientService {
   getClient(id){
     return this.server.request('GET', '/user/' + id)
     .pipe(
-      // tap((res:Response) => console.log(res)),
+      tap((res:Response) => console.log(res)),
       map((res:any) => {
         return this.parseClient(res);
       })
     );
+  }
 
+  registerClient(data){
+    return this.server.request('POST', '/client/', {
+      username: data['username'],
+      first_name: data['first_name'],
+      last_name: data['last_name'],
+      password: data['password'],
+      company: {
+        company_id: data['company_id'],
+      },
+      employee: {
+        user_id: data['employee_id']
+      },
+      roles:[
+        {role_id:3}
+      ]
+    })
   }
 
   getClientsForEmployee(id){
     return this.server.request('GET', '/client/user/' + id)
+    .pipe(
+      // tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        var clients = new Array<Client>();
+        res.forEach(x=>
+          clients.push(this.parseClient(x))
+        );
+        return clients;
+      })
+    );
+  }
+
+  getClientsForCompany(id){
+    return this.server.request('GET', '/client/cc/' + id)
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
