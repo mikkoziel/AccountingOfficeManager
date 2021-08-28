@@ -47,6 +47,7 @@ import { AddEventComponent } from './components/add-event/add-event.component';
 import { RegisterCcComponent } from './components/register-cc/register-cc.component';
 import { CompaniesManagementComponent } from './components/companies-management/companies-management.component';
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
+import { AddClientComponent } from './components/add-client/add-client.component';
 
 const components = [
   AppComponent,
@@ -87,6 +88,7 @@ const material = [
     RegisterCcComponent,
     CompaniesManagementComponent,
     CompanyInfoComponent,
+    AddClientComponent,
   ],
   imports: [
     BrowserModule,
