@@ -34,7 +34,7 @@ export class AddClientComponent implements OnInit {
       last_name: ['', Validators.required],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     });
-    console.log(this.data)
+    // console.log(this.data)
   }
 
   async onSubmit(){
