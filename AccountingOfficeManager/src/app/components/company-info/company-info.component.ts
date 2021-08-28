@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/entity/client';
 import { Company } from 'src/app/entity/company';
@@ -6,6 +7,7 @@ import { User } from 'src/app/entity/user';
 import { ClientService } from 'src/app/services/client.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { UserService } from 'src/app/services/user.service';
+import { AddClientComponent } from '../add-client/add-client.component';
 
 @Component({
   selector: 'app-company-info',
@@ -28,7 +30,8 @@ export class CompanyInfoComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private companyService: CompanyService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
@@ -47,7 +50,17 @@ export class CompanyInfoComponent implements OnInit {
         })
       })
     });
+  }
 
+  addNewClient(){
+    let dialogRef = this.dialog.open(AddClientComponent, {
+      height: '400px',
+      width: '600px',
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
