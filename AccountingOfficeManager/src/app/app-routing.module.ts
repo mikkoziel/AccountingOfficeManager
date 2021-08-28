@@ -6,6 +6,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { CompaniesManagementComponent } from './components/companies-management/companies-management.component';
+import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
 
@@ -35,6 +36,7 @@ const routes: Routes = [
     { path: 'employees/:id', component: EmployeeInfoComponent, canActivate: [AuthGuard]},
     { path: 'register-cc', component: RegisterCcComponent, canActivate: [AuthGuard]},
     { path: 'companies', component: CompaniesManagementComponent, canActivate: [AuthGuard]},
+    { path: 'company/:id', component: CompanyInfoComponent, canActivate: [AuthGuard]}
   
 
 ]
