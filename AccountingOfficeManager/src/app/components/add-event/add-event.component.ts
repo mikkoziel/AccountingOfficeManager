@@ -44,7 +44,7 @@ export class AddEventComponent implements OnInit {
       this.form.value["title"],
       this.form.value["all_day"],
     ).subscribe(x=>{
-      console.log("UMPA LUMPAS")
+      // console.log("UMPA LUMPAS")
     })
   }
 
