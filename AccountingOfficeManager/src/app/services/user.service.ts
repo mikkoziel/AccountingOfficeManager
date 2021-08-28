@@ -101,6 +101,12 @@ export class UserService {
     })
   }
 
+  changeRole(data){
+    return this.server.request('POST', '/user/updateRole/' + data['user_id'],{
+      role_id: data['role_id']
+    })
+  }
+
   parseAO(data): AO{
     return <AO>{
       company_id: data["company_id"],

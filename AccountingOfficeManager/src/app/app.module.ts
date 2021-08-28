@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -80,6 +81,7 @@ const material = [
   MatExpansionModule,
   MatDialogModule,
   MatCheckboxModule,
+  MatSelectModule,
 ]
 
 @NgModule({

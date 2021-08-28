@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Employee } from 'src/app/entity/employee';
 import { User } from 'src/app/entity/user';
@@ -15,7 +16,7 @@ export class EmployeesManagementComponent implements OnInit {
   currentUser: User;
   employees: Array<Employee>;
   displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
-
+  
   constructor(
     private userService: UserService,
     private eService: EmployeeService,
@@ -43,5 +44,6 @@ export class EmployeesManagementComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
 
 }
