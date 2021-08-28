@@ -48,6 +48,7 @@ import { RegisterCcComponent } from './components/register-cc/register-cc.compon
 import { CompaniesManagementComponent } from './components/companies-management/companies-management.component';
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { AddClientComponent } from './components/add-client/add-client.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 const components = [
   AppComponent,
@@ -89,6 +90,7 @@ const material = [
     CompaniesManagementComponent,
     CompanyInfoComponent,
     AddClientComponent,
+    AddEmployeeComponent,
   ],
   imports: [
     BrowserModule,
