@@ -22,7 +22,7 @@ export class CompaniesManagementComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
-      this.companyService.getCCForAO(this.currentUser.company.company_id).subscribe(res=>{
+      this.companyService.getCCForAO(this.currentUser.id).subscribe(res=>{
         console.log(res)
         this.clients = res;
       })
