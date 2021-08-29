@@ -28,16 +28,17 @@ export class EmployeeInfoComponent implements OnInit {
   
   employees: Array<Employee>;
   employeeDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'info'];
-  
-  form: FormGroup;
+ 
   selectedRole;
+  selectedClient;
+
+  availableClients: Array<Client>;
   
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private eService: EmployeeService,
     private clientService: ClientService,
-    private fb: FormBuilder,
     private router: Router,
     ) { }
 
@@ -60,6 +61,13 @@ export class EmployeeInfoComponent implements OnInit {
         this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
           this.employees = res;
         })
+
+        this.clientService.getClientsForAdmin(this.employee.admin).subscribe(res=>{
+          this.availableClients = res;
+          this.selectedClient = this.availableClients[0].id
+          console.log(this.availableClients)
+          console.log(this.selectedClient)
+        })
       })
     });
   }
@@ -71,7 +79,13 @@ export class EmployeeInfoComponent implements OnInit {
     }).subscribe(x=>{
       refreshComponent(this.router);
     })
+  }
 
+  assignClient(){
+    this.userService.assignClient({
+      employee_id: this.employee.id,
+      client_id: this.selectedClient
+    })
   }
 
 }

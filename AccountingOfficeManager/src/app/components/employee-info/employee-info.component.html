@@ -20,12 +20,26 @@
       <form (ngSubmit)="changeRole()" class="register-form">
           <mat-form-field appearance="fill">
               <mat-label>Change role</mat-label>
-              <select matNativeControl  [(ngModel)]="selectedRole" name="role_select" required>
+              <select matNativeControl [(ngModel)]="selectedRole" name="role_select" required>
                 <option value="2" selected>USER</option>
                 <option value="1">ADMIN</option>
               </select>
           </mat-form-field>
           <button mat-raised-button color="warn">Change</button>
+      </form>
+
+      <br />
+
+      <form (ngSubmit)="assignClient()" class="register-form">
+          <mat-form-field appearance="fill">
+              <mat-label>Assign Employee</mat-label>
+              <select matNativeControl [(ngModel)]="selectedClient" name="client_select" required>
+                <mat-option *ngFor="let client of availableClients" [value]="client.id">
+                  {{client.id}}
+                </mat-option>
+              </select>
+          </mat-form-field>
+          <button mat-raised-button color="warn">Assign</button>
       </form>
 
       <br />
