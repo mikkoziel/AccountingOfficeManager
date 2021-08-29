@@ -19,7 +19,7 @@ export class ClientService {
   getClient(id){
     return this.server.request('GET', '/user/' + id)
     .pipe(
-      tap((res:Response) => console.log(res)),
+      // tap((res:Response) => console.log(res)),
       map((res:any) => {
         return this.parseClient(res);
       })
