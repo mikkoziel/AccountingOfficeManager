@@ -30,17 +30,19 @@
 
       <br />
 
-      <form (ngSubmit)="assignClient()" class="register-form">
-          <mat-form-field appearance="fill">
-              <mat-label>Assign Employee</mat-label>
-              <select matNativeControl [(ngModel)]="selectedClient" name="client_select" required>
-                <mat-option *ngFor="let client of availableClients" [value]="client.id">
-                  {{client.id}}
-                </mat-option>
-              </select>
-          </mat-form-field>
-          <button mat-raised-button color="warn">Assign</button>
-      </form>
+      <div *ngIf="clientsLoaded | async">
+        <form (ngSubmit)="assignClient()" class="register-form">
+            <mat-form-field appearance="fill">
+                <mat-label>Assign Employee</mat-label>
+                <select matNativeControl [(ngModel)]="selectedClient" name="client_select" required>
+                  <mat-option *ngFor="let client of availableClients" [value]="client.id">
+                    {{client.first_name}}
+                  </mat-option>
+                </select>
+            </mat-form-field>
+            <button mat-raised-button color="warn">Assign</button>
+        </form>
+      </div>
 
       <br />
 

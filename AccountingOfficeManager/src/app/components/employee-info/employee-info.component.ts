@@ -33,6 +33,7 @@ export class EmployeeInfoComponent implements OnInit {
   selectedClient;
 
   availableClients: Array<Client>;
+  clientsLoaded: Promise<boolean>;
   
   constructor(
     private userService: UserService,
@@ -67,6 +68,7 @@ export class EmployeeInfoComponent implements OnInit {
           this.selectedClient = this.availableClients[0].id
           console.log(this.availableClients)
           console.log(this.selectedClient)
+          this.clientsLoaded = Promise.resolve(true)
         })
       })
     });
