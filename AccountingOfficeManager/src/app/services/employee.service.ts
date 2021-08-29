@@ -31,7 +31,7 @@ export class EmployeeService {
   getEmployeesForAdmin(id){
     return this.server.request('GET', '/employee/admin/' + id)
     .pipe(
-      tap((res:Response) => console.log(res)),
+      // tap((res:Response) => console.log(res)),
       map((res: any) => {
         return this.parseEmployeeArray(res)
       })
@@ -66,9 +66,7 @@ export class EmployeeService {
   parseEmployeeArray(data): Employee[] {
     var employees = new Array<Employee>();
     data.forEach(x=>{
-      // console.log(x)
       let empl = this.checkEmployee(data, x);
-      // console.log(empl)
       employees.push(this.parseEmployee(empl))
     });
     return employees;
@@ -96,7 +94,6 @@ export class EmployeeService {
       "date": date,
       "duration": duration,
     }
-    // console.log(data)
     return this.server.request('POST', '/work-log/', data)
   }
 
@@ -113,11 +110,9 @@ export class EmployeeService {
   }
 
   public sortByDate(arr): Array<WorkLog> {
-    // console.log(arr)
     arr.sort((a: WorkLog, b: WorkLog) => {
         return b.date.getTime() - a.date.getTime();
     });
-    // console.log(arr)
     return arr;
   }
 }

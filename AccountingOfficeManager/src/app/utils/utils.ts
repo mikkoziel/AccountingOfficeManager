@@ -48,19 +48,34 @@ export function getRole(role){
         return "undefined"
     } else {
         if(role.constructor == Object){
-            // console.log("ttu")
+            // console.log("object")
             return Roles[role["role_id"]]
         } else {
             if(Array.isArray(role)){
+                // console.log("array")
                 let role_array = []
                 role.forEach(x=>{
                     role_array.push(getRole(x))
                 })                
+                // console.log(role_array)
                 return role_array[0]
             }else{
-                // console.log("iudh")
-                return Roles[role[0]]
+                // console.log(role[0])
+                return Roles[role]
             }
         }
     }
 }
+
+export function getRoleByString(myEnum, enumValue) {
+    let keys = Object.keys(myEnum).filter(x => myEnum[x] == enumValue);
+    return keys.length > 0 ? keys[0] : null;
+}
+
+export function  refreshComponent(router) {
+    const currentRoute = router.url;
+
+    router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        router.navigate([currentRoute]); 
+    }); 
+  }

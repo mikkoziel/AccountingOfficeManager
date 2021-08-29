@@ -83,6 +83,30 @@ export class UserService {
     })
   }
 
+  registerEmployee(data){
+    return this.server.request('POST', '/employee/', {
+      username: data['username'],
+      first_name: data['first_name'],
+      last_name: data['last_name'],
+      password: data['password'],
+      // company:{
+      //   company_id: data['company_id']
+      // },
+      admin:{
+        user_id: data["admin_id"]
+      },
+      roles:[
+        {role_id:2}
+      ]
+    })
+  }
+
+  changeRole(data){
+    return this.server.request('POST', '/user/updateRole/' + data['user_id'],{
+      role_id: data['role_id']
+    })
+  }
+
   parseAO(data): AO{
     return <AO>{
       company_id: data["company_id"],

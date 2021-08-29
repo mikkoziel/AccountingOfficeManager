@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -48,6 +49,7 @@ import { RegisterCcComponent } from './components/register-cc/register-cc.compon
 import { CompaniesManagementComponent } from './components/companies-management/companies-management.component';
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { AddClientComponent } from './components/add-client/add-client.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 const components = [
   AppComponent,
@@ -79,6 +81,7 @@ const material = [
   MatExpansionModule,
   MatDialogModule,
   MatCheckboxModule,
+  MatSelectModule,
 ]
 
 @NgModule({
@@ -89,6 +92,7 @@ const material = [
     CompaniesManagementComponent,
     CompanyInfoComponent,
     AddClientComponent,
+    AddEmployeeComponent,
   ],
   imports: [
     BrowserModule,

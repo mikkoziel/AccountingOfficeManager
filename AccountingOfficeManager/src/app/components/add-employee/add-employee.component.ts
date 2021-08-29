@@ -2,31 +2,31 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/entity/user';
-import { ClientService } from 'src/app/services/client.service';
 import { UserService } from 'src/app/services/user.service';
-import { CompanyInfoComponent } from '../company-info/company-info.component';
+import { EmployeesManagementComponent } from '../employees-management/employees-management.component';
 
 @Component({
-  selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.css']
+  selector: 'app-add-employee',
+  templateUrl: './add-employee.component.html',
+  styleUrls: ['./add-employee.component.css']
 })
-export class AddClientComponent implements OnInit {
+export class AddEmployeeComponent implements OnInit {
   hide: boolean = true;
   form: FormGroup;
   currentUser: User;
 
   constructor(
-    public dialogRef: MatDialogRef<AddClientComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CompanyInfoComponent,
+    public dialogRef: MatDialogRef<AddEmployeeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: EmployeesManagementComponent,
     private fb: FormBuilder, 
     private userService: UserService,
-    private clientService: ClientService,
     ) { }
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
+      
+      console.log(this.currentUser)
     })
     this.form = this.fb.group({
       username: ['', Validators.email],
@@ -34,17 +34,16 @@ export class AddClientComponent implements OnInit {
       last_name: ['', Validators.required],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     });
-    // console.log(this.data)
   }
 
   async onSubmit(){
-    await this.clientService.registerClient({
+    await this.userService.registerEmployee({
       username: this.form.value["username"],
       first_name: this.form.value["first_name"],
       last_name: this.form.value["last_name"],
       password: this.form.value["password"],
-      company_id: this.data["company_id"],
-      employee_id: this.currentUser.id
+      // company_id: this.currentUser.company.company_id,
+      admin_id: this.currentUser.id
     }
     ).subscribe(x=>{
       console.log(x)
@@ -54,5 +53,4 @@ export class AddClientComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

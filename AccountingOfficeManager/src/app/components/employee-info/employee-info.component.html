@@ -17,6 +17,19 @@
 
       <br />
 
+      <form (ngSubmit)="changeRole()" class="register-form">
+          <mat-form-field appearance="fill">
+              <mat-label>Change role</mat-label>
+              <select matNativeControl  [(ngModel)]="selectedRole" name="role_select" required>
+                <option value="2" selected>USER</option>
+                <option value="1">ADMIN</option>
+              </select>
+          </mat-form-field>
+          <button mat-raised-button color="warn">Change</button>
+      </form>
+
+      <br />
+
       <mat-accordion class="accordion">
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
@@ -61,7 +74,7 @@
 
       <br />
 
-      <mat-accordion *ngIf="employee.role=='ADMIN' || employee.role=='AO_ADMIN'" class="accordion">
+      <mat-accordion *ngIf="employee?.role=='ADMIN' || employee?.role=='AO_ADMIN'" class="accordion">
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
