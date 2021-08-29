@@ -30,7 +30,7 @@ export class EmployeeInfoComponent implements OnInit {
   employeeDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'info'];
   
   form: FormGroup;
-  selected;
+  selectedRole;
   
   constructor(
     private userService: UserService,
@@ -48,11 +48,8 @@ export class EmployeeInfoComponent implements OnInit {
       this.employee_id = params['id'];
       this.eService.getEmployee(this.employee_id).subscribe(res=>{
         this.employee = res;
-        // this.form = this.fb.group({
-        //   role: [this.employee.role, Validators.required],
-        // })
-        this.selected = getRoleByString(Roles, this.employee.role);
-        console.log(this.selected)
+        this.selectedRole = getRoleByString(Roles, this.employee.role);
+        // console.log(this.selectedRole)
         this.dataSource = Object.entries(this.employee);
         this.dataSource.splice(2,1);
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
@@ -66,12 +63,12 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   changeRole(){
-    console.log(this.selected)
-    console.log(getRoleByString(Roles, this.selected))
-    // this.userService.changeRole({
-    //   user_id: this.employee.id,
-    //   role_id: this.form.get('role').value
-    // })
+    console.log(this.selectedRole)
+    console.log(Roles[this.selectedRole])
+    this.userService.changeRole({
+      user_id: this.employee.id,
+      role_id: this.selectedRole
+    })
 
   }
 }
