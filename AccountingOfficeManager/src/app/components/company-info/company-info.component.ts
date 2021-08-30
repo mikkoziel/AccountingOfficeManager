@@ -48,7 +48,7 @@ export class CompanyInfoComponent implements OnInit {
         this.dataSource.splice(2,1);
         this.spinnerFlag += 1;
       })
-      this.clientService.getClientsForCompany(this.company.company_id).subscribe(res=>{
+      this.clientService.getClientsForCompany(this.company_id).subscribe(res=>{
         this.clients = res;
         this.spinnerFlag += 1;
       })

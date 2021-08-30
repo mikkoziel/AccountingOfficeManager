@@ -53,10 +53,11 @@ export class CalendarComponent implements OnInit{
   ngOnInit(){
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
-      console.log(user)
+      // console.log(user)
       this.calendarService.getCalendarForUser(this.currentUser.id).subscribe(result=>{
         console.log(result)
         result.forEach(x=>{
+          console.log(x)
           this.events.push(
             <CalendarEvent>{
               start: x.start_date,
@@ -66,7 +67,8 @@ export class CalendarComponent implements OnInit{
             }
           )
         })
-        this.spinnerFlag = 1
+        this.spinnerFlag += 1
+        console.log(this.spinnerFlag)
       })
     })
   }
