@@ -1,4 +1,6 @@
-<div class="div_container">
+<div class="div_container">  
+  <mat-progress-bar *ngIf="spinnerFlag!=2" mode="indeterminate"></mat-progress-bar>
+  
     <h1>CLIENT COMPANY PROFILE</h1>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
  
@@ -18,7 +20,6 @@
       <br />
       <button class="button" (click)="addNewClient()" mat-raised-button color="warn">Add client</button>
  
-
       <br />
 
       <mat-accordion class="accordion">

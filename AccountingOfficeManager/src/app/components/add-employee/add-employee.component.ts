@@ -26,7 +26,7 @@ export class AddEmployeeComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
       
-      console.log(this.currentUser)
+      // console.log(this.currentUser)
     })
     this.form = this.fb.group({
       username: ['', Validators.email],

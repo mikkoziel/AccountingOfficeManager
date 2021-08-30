@@ -21,6 +21,8 @@ export class WorkManagementComponent implements OnInit {
   display ;
   interval;
 
+  spinnerFlag = 0;
+
   constructor(
     private userService: UserService,
     private employeeService: EmployeeService,
@@ -28,10 +30,12 @@ export class WorkManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user =>{
-      this.currentUser = user;this.employeeService.getWorkLogs(this.currentUser.id).subscribe(res=>{
+      this.currentUser = user;
+      this.employeeService.getWorkLogs(this.currentUser.id).subscribe(res=>{
         // console.log(res)
         this.worklogs = res;
         this.dataSource = Object.entries(this.worklogs);
+        this.spinnerFlag += 1;
       })
     })
   }

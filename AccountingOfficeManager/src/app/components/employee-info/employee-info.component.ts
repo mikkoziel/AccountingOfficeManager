@@ -9,6 +9,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Roles } from 'src/app/entity/role';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { getRoleByString, refreshComponent } from 'src/app/utils/utils';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-employee-info',
@@ -28,16 +29,20 @@ export class EmployeeInfoComponent implements OnInit {
   
   employees: Array<Employee>;
   employeeDisplayedColumns: string[] = ['first_name', 'last_name', 'username', 'info'];
-  
-  form: FormGroup;
+ 
   selectedRole;
+  selectedClient;
+
+  availableClients : Array<Client>;
+  clientsLoaded: Promise<boolean>;
+
+  spinnerFlag = 0;
   
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private eService: EmployeeService,
     private clientService: ClientService,
-    private fb: FormBuilder,
     private router: Router,
     ) { }
 
@@ -55,10 +60,24 @@ export class EmployeeInfoComponent implements OnInit {
         this.dataSource.splice(2,1);
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
           this.clients = res;
+          this.spinnerFlag += 1;
         })
         
         this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
           this.employees = res;
+          this.spinnerFlag += 1;
+        })
+
+        let id = this.employee.admin
+        if(this.employee.admin == null){
+          id = this.employee.id
+        }
+
+        this.clientService.getClientsForAdmin(id).subscribe(res=>{
+          this.availableClients = res;
+          this.selectedClient = this.availableClients[0].id
+          this.clientsLoaded = Promise.resolve(true)
+          this.spinnerFlag += 1;
         })
       })
     });
@@ -71,7 +90,15 @@ export class EmployeeInfoComponent implements OnInit {
     }).subscribe(x=>{
       refreshComponent(this.router);
     })
+  }
 
+  assignClient(){
+    this.userService.assignClient({
+      employee_id: this.employee.id,
+      client_id: this.selectedClient
+    }).subscribe(x=>{
+      refreshComponent(this.router);
+    })
   }
 
 }

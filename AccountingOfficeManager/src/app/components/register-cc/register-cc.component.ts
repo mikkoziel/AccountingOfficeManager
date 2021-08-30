@@ -15,6 +15,8 @@ export class RegisterCcComponent implements OnInit {
   form: FormGroup;
   currentUser: User;
 
+  spinnerFlag = 0;
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -32,9 +34,11 @@ export class RegisterCcComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.spinnerFlag += 1;
     console.log('Submitting');
     if (!this.form.valid) {
       console.log('Form not valid. Please check that fields are correctly filled in');
+      this.spinnerFlag -= 1;
       return;
     }
 
@@ -45,6 +49,7 @@ export class RegisterCcComponent implements OnInit {
     
     request.subscribe(() => {
       this.router.navigate(['/login']);
+      this.spinnerFlag -= 1;
     })
   }
 

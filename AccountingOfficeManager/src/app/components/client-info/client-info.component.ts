@@ -22,6 +22,8 @@ export class ClientInfoComponent implements OnInit {
   documents: Array<Document>
   docDisplayedColumns: string[] = ['id', 'description', 'download'];
 
+  spinnerFlag = 0;
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -45,9 +47,11 @@ export class ClientInfoComponent implements OnInit {
           Employee: this.client.employee_id,
           Role: this.client.role
         });
+        this.spinnerFlag += 1;
       })
       this.clientService.getDocumentForClient(this.client_id).subscribe(res=>{
         this.documents = res;
+        this.spinnerFlag += 1;
       })
     })
   }

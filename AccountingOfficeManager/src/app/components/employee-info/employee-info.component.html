@@ -1,4 +1,6 @@
 <div class="div_container">
+  <mat-progress-bar *ngIf="spinnerFlag!=3" mode="indeterminate"></mat-progress-bar>
+    
     <h1>EMPLOYEE PROFILE</h1>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
  
@@ -15,22 +17,44 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
+      <div *ngIf="currentUser?.id==employee?.admin">
+        <br />
+
+        <div *ngIf="employee?.role!='AO_ADMIN' or employee?.role!='USER'">
+          <form (ngSubmit)="changeRole()" class="register-form">
+              <mat-form-field appearance="fill">
+                  <mat-label>Change role</mat-label>
+                  <select matNativeControl [(ngModel)]="selectedRole" name="role_select" required>
+                    <option value="2" selected>USER</option>
+                    <option value="1">ADMIN</option>
+                  </select>
+              </mat-form-field>
+              <button mat-raised-button color="warn">Change</button>
+          </form>
+        </div>
+
+        <br />
+
+        <div *ngIf="clientsLoaded | async">
+          <form (ngSubmit)="assignClient()" class="register-form">
+              <mat-form-field appearance="fill">
+                  <mat-label>Assign Employee</mat-label>
+                  <select matNativeControl [(ngModel)]="selectedClient" name="client_select" required>
+                    <option 
+                    *ngFor="let client of availableClients" 
+                    [value]="client.id">
+                      {{ client.company.name }}: {{ client.last_name }} {{ client.first_name}}
+                      
+                    </option>
+                  </select>
+              </mat-form-field>
+              <button mat-raised-button color="warn">Assign</button>
+          </form>
+        </div>
+      </div>
       <br />
 
-      <form (ngSubmit)="changeRole()" class="register-form">
-          <mat-form-field appearance="fill">
-              <mat-label>Change role</mat-label>
-              <select matNativeControl  [(ngModel)]="selectedRole" name="role_select" required>
-                <option value="2" selected>USER</option>
-                <option value="1">ADMIN</option>
-              </select>
-          </mat-form-field>
-          <button mat-raised-button color="warn">Change</button>
-      </form>
-
-      <br />
-
-      <mat-accordion class="accordion">
+      <mat-accordion *ngIf="employee?.role=='ADMIN' || employee?.role=='AO_ADMIN'" class="accordion">
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -74,7 +98,7 @@
 
       <br />
 
-      <mat-accordion *ngIf="employee?.role=='ADMIN' || employee?.role=='AO_ADMIN'" class="accordion">
+      <mat-accordion class="accordion">
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>

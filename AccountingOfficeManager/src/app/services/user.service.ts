@@ -101,6 +101,13 @@ export class UserService {
     })
   }
 
+  assignClient(data){
+    return this.server.request('POST','/client/employee/', {
+      employee_id: data["employee_id"],
+      client_id: data["client_id"]
+    })
+  }
+
   changeRole(data){
     return this.server.request('POST', '/user/updateRole/' + data['user_id'],{
       role_id: data['role_id']

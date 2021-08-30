@@ -17,6 +17,8 @@ export class EmployeesManagementComponent implements OnInit {
   employees: Array<Employee>;
   displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
   
+  spinnerFlag = 0;
+
   constructor(
     private userService: UserService,
     private eService: EmployeeService,
@@ -29,6 +31,7 @@ export class EmployeesManagementComponent implements OnInit {
       this.eService.getEmployeesForAdmin(this.currentUser.id).subscribe(res=>{
         // console.log(res)
         this.employees = res;
+        this.spinnerFlag += 1;
       })
     })
   }

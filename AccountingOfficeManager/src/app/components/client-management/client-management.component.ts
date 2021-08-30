@@ -14,6 +14,8 @@ export class ClientManagementComponent implements OnInit {
   clients: Array<Client>;
   displayedColumns: string[] = ['first_name', 'last_name', 'username', 'company', 'info'];
   
+  spinnerFlag = 0;
+
   constructor(
     private userService: UserService,
     private clientService: ClientService
@@ -25,6 +27,7 @@ export class ClientManagementComponent implements OnInit {
       this.clientService.getClientsForEmployee(this.currentUser.id).subscribe(res=>{
         console.log(res)
         this.clients = res;
+        this.spinnerFlag += 1
       })
     })
   }

@@ -1,4 +1,6 @@
 <div class="div_container">
+  <mat-progress-bar *ngIf="spinnerFlag==0" mode="indeterminate"></mat-progress-bar>
+    
     <h1>YOUR PROFILE</h1>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
  
@@ -14,6 +16,17 @@
     
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <br />
+    
+    <div *ngIf='currentUser.role!="USER"'>
+      <button mat-raised-button routerLink="/employees/{{currentUser.id}}" color="warn">Show employee profile</button>
+    </div>
+    <div *ngIf='currentUser.role=="USER"'>
+      <button mat-raised-button routerLink="/clients/{{currentUser.id}}" color="warn">Show client profile</button>
+    </div>
+
+    <br />
 
     <mat-accordion class="accordion">
       <mat-expansion-panel hideToggle>

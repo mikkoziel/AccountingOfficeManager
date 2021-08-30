@@ -13,6 +13,8 @@ export class CompaniesManagementComponent implements OnInit {
   currentUser: User;
   clients: Array<ClientCompany>;
   displayedColumns: string[] = ['name', 'info'];
+
+  spinnerFlag = 0;
   
   constructor(
   private userService: UserService,
@@ -25,6 +27,7 @@ export class CompaniesManagementComponent implements OnInit {
       this.companyService.getCCForAO(this.currentUser.id).subscribe(res=>{
         console.log(res)
         this.clients = res;
+        this.spinnerFlag += 1;
       })
     })
   }

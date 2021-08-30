@@ -63,13 +63,19 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        var clients = new Array<Client>();
-        res.forEach(x=>
-          clients.push(this.parseClient(x))
-        );
-        return clients;
+        return this.parseClientArray(res)
       })
     );
+  }
+
+  getClientsForAdmin(id){
+    return this.server.request('GET', '/client/admin/' + id)
+    .pipe(
+      // tap((res:Response) => console.log(res)),
+      map((res: any) => {
+        return this.parseClientArray(res)
+      })
+    )
   }
 
   getDocumentForClient(id){
@@ -77,14 +83,18 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        var documents = new Array<Document>();
-        res.forEach(x=>
-          documents.push(this.parseDocument(x))
-        );
-        return documents;
+        return this.parseDocumentArray(res);
       })
     );
     
+  }
+
+  parseClientArray(data): Client[] {
+    var clients = new Array<Client>();
+    data.forEach(x=>
+      clients.push(this.parseClient(x))
+    );
+    return clients;
   }
 
   parseClient(data): Client{
@@ -98,6 +108,14 @@ export class ClientService {
         username: data["username"],
         role: role_check,
       }
+  }
+
+  parseDocumentArray(data): Document[]{
+    var documents = new Array<Document>();
+    data.forEach(x=>
+      documents.push(this.parseDocument(x))
+    );
+    return documents;
   }
 
   parseDocument(data): Document{
