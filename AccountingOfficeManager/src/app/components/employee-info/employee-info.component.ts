@@ -68,7 +68,12 @@ export class EmployeeInfoComponent implements OnInit {
           this.spinnerFlag += 1;
         })
 
-        this.clientService.getClientsForAdmin(this.employee.admin).subscribe(res=>{
+        let id = this.employee.admin
+        if(this.employee.admin == null){
+          id = this.employee.id
+        }
+
+        this.clientService.getClientsForAdmin(id).subscribe(res=>{
           this.availableClients = res;
           this.selectedClient = this.availableClients[0].id
           this.clientsLoaded = Promise.resolve(true)

@@ -17,6 +17,17 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
+    <br />
+    
+    <div *ngIf='currentUser.role!="USER"'>
+      <button mat-raised-button routerLink="/employees/{{currentUser.id}}" color="warn">Show employee profile</button>
+    </div>
+    <div *ngIf='currentUser.role=="USER"'>
+      <button mat-raised-button routerLink="/clients/{{currentUser.id}}" color="warn">Show client profile</button>
+    </div>
+
+    <br />
+
     <mat-accordion class="accordion">
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>

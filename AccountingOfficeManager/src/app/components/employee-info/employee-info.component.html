@@ -20,7 +20,7 @@
       <div *ngIf="currentUser?.id==employee?.admin">
         <br />
 
-        <div>
+        <div *ngIf="employee?.role!='AO_ADMIN' or employee?.role!='USER'">
           <form (ngSubmit)="changeRole()" class="register-form">
               <mat-form-field appearance="fill">
                   <mat-label>Change role</mat-label>
