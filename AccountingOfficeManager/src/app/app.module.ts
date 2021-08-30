@@ -23,6 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -36,20 +38,20 @@ import { ClientProfileComponent } from './components/client-profile/client-profi
 import { ActionsComponent } from './components/actions/actions.component';
 import { AoContactComponent } from './components/ao-contact/ao-contact.component';
 import { EmployeesManagementComponent } from './components/employees-management/employees-management.component';
-
-import { CalendarModule, DateAdapter, CalendarCommonModule } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { environment } from 'src/environments/environment';
-import { AuthService } from './services/auth.service';
-import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
-import { ClientInfoComponent } from './components/client-info/client-info.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { RegisterCcComponent } from './components/register-cc/register-cc.component';
 import { CompaniesManagementComponent } from './components/companies-management/companies-management.component';
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { AddClientComponent } from './components/add-client/add-client.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
+import { ClientInfoComponent } from './components/client-info/client-info.component';
+
+import { CalendarModule, DateAdapter, CalendarCommonModule } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './services/auth.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const components = [
   AppComponent,
@@ -82,6 +84,8 @@ const material = [
   MatDialogModule,
   MatCheckboxModule,
   MatSelectModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule,
 ]
 
 @NgModule({
