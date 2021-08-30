@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
   hide: boolean = true;
   form: FormGroup;
 
+  spinnerFlag = 0
+
   constructor(
     private fb: FormBuilder,
     private server: ServerService,
@@ -31,9 +33,11 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.spinnerFlag += 1;
     console.log('Submitting');
     if (!this.form.valid) {
       console.log('Form not valid. Please check that fields are correctly filled in');
+      this.spinnerFlag -= 1;
       return;
     }
 
@@ -47,6 +51,7 @@ export class RegisterComponent implements OnInit {
     
     request.subscribe(() => {
       this.router.navigate(['/login']);
+      this.spinnerFlag -= 1;
     })
   }
 

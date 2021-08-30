@@ -17,6 +17,8 @@ export class UserProfileComponent implements OnInit {
   hide2 = true;
   hide3 = true;
 
+  spinnerFlag = 0;
+
   constructor(
     private userService: UserService,
     private fb: FormBuilder, 
@@ -33,10 +35,13 @@ export class UserProfileComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
       this.dataSource = Object.entries(this.currentUser);
+      this.spinnerFlag += 1;
     })
   }
 
   changePassword(){
+    
+    this.spinnerFlag -= 1;
     if (this.form.valid && this.form.value.new_password == this.form.value.rep_password) {
       this.userService.changePassword({
           "new_password": this.form.value.new_password,
@@ -47,6 +52,7 @@ export class UserProfileComponent implements OnInit {
     } else {
       console.log("Passwords doesn't match.")
     }
+    this.spinnerFlag += 1;
   }
 
 }

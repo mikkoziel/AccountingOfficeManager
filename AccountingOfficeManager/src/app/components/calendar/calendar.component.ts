@@ -41,6 +41,8 @@ export class CalendarComponent implements OnInit{
   
   activeDayIsOpen: boolean = true;
 
+  spinnerFlag = 0
+
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
@@ -64,6 +66,7 @@ export class CalendarComponent implements OnInit{
             }
           )
         })
+        this.spinnerFlag = 1
       })
     })
   }

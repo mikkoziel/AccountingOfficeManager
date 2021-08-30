@@ -1,4 +1,6 @@
 <div class="div_container">
+  <mat-progress-bar *ngIf="spinnerFlag!=0" mode="indeterminate"></mat-progress-bar>
+    
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
     <h1>Sign Up</h1>
     <p>Please enter your details</p>

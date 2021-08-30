@@ -9,6 +9,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Roles } from 'src/app/entity/role';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { getRoleByString, refreshComponent } from 'src/app/utils/utils';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-employee-info',
@@ -32,8 +33,11 @@ export class EmployeeInfoComponent implements OnInit {
   selectedRole;
   selectedClient;
 
-  availableClients: Array<Client>;
+  availableClients
+  // : Array<Client>;
   clientsLoaded: Promise<boolean>;
+
+  spinnerFlag = 0;
   
   constructor(
     private userService: UserService,
@@ -57,18 +61,30 @@ export class EmployeeInfoComponent implements OnInit {
         this.dataSource.splice(2,1);
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
           this.clients = res;
+          this.spinnerFlag += 1;
+          console.log("clientEmployye")
+          console.log(this.spinnerFlag)
         })
         
         this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
           this.employees = res;
+          this.spinnerFlag += 1;
+          console.log("EmployyeAdmin")
+          console.log(this.spinnerFlag)
         })
 
+        // this.availableClients = this.clientService.getClientsForAdmin(this.employee.admin)
         this.clientService.getClientsForAdmin(this.employee.admin).subscribe(res=>{
           this.availableClients = res;
           this.selectedClient = this.availableClients[0].id
           console.log(this.availableClients)
+          console.log(this.availableClients[0])
           console.log(this.selectedClient)
           this.clientsLoaded = Promise.resolve(true)
+          console.log(this.clientsLoaded)
+          this.spinnerFlag += 1;
+          console.log("ClientsAdmin")
+          console.log(this.spinnerFlag)
         })
       })
     });

@@ -1,5 +1,7 @@
 <div class="div_container">
     <h1>EMPLOYEE PROFILE</h1>
+    <!-- <mat-spinner *ngIf="spinnerFlag!=3"></mat-spinner> -->
+    <mat-progress-bar *ngIf="spinnerFlag!=3" mode="indeterminate"></mat-progress-bar>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
  
         <ng-container matColumnDef="name">
@@ -36,7 +38,7 @@
                 <mat-label>Assign Employee</mat-label>
                 <select matNativeControl [(ngModel)]="selectedClient" name="client_select" required>
                   <mat-option *ngFor="let client of availableClients" [value]="client.id">
-                    {{client.first_name}}
+                    {{client.id}}
                   </mat-option>
                 </select>
             </mat-form-field>

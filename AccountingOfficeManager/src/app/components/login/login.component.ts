@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
+  
+  spinnerFlag = 0;
 
   constructor(
     private fb: FormBuilder, 
@@ -26,17 +28,20 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.spinnerFlag = 1
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.form.valid) {
       try {
-        await this.authService.login(this.form.value);      
+        await this.authService.login(this.form.value);
       } catch (err) {
         this.loginInvalid = true;
+        this.spinnerFlag = 0
       }
     } else {
       this.formSubmitAttempt = true;
-    }
+      this.spinnerFlag = 0
+    } 
   }
 
 }
