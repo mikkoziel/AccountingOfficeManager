@@ -33,8 +33,7 @@ export class EmployeeInfoComponent implements OnInit {
   selectedRole;
   selectedClient;
 
-  availableClients
-  // : Array<Client>;
+  availableClients : Array<Client>;
   clientsLoaded: Promise<boolean>;
 
   spinnerFlag = 0;
@@ -62,29 +61,18 @@ export class EmployeeInfoComponent implements OnInit {
         this.clientService.getClientsForEmployee(this.employee.id).subscribe(res=>{
           this.clients = res;
           this.spinnerFlag += 1;
-          console.log("clientEmployye")
-          console.log(this.spinnerFlag)
         })
         
         this.eService.getEmployeesForAdmin(this.employee.id).subscribe(res=>{
           this.employees = res;
           this.spinnerFlag += 1;
-          console.log("EmployyeAdmin")
-          console.log(this.spinnerFlag)
         })
 
-        // this.availableClients = this.clientService.getClientsForAdmin(this.employee.admin)
         this.clientService.getClientsForAdmin(this.employee.admin).subscribe(res=>{
           this.availableClients = res;
           this.selectedClient = this.availableClients[0].id
-          console.log(this.availableClients)
-          console.log(this.availableClients[0])
-          console.log(this.selectedClient)
           this.clientsLoaded = Promise.resolve(true)
-          console.log(this.clientsLoaded)
           this.spinnerFlag += 1;
-          console.log("ClientsAdmin")
-          console.log(this.spinnerFlag)
         })
       })
     });
@@ -103,6 +91,8 @@ export class EmployeeInfoComponent implements OnInit {
     this.userService.assignClient({
       employee_id: this.employee.id,
       client_id: this.selectedClient
+    }).subscribe(x=>{
+      refreshComponent(this.router);
     })
   }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Client } from 'src/app/entity/client';
+import { Employee } from 'src/app/entity/employee';
 import { User } from 'src/app/entity/user';
 import { UserService } from 'src/app/services/user.service';
 @Component({
@@ -11,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   currentUser: User;
   displayedColumns: string[] = ['name', 'value'];
   dataSource;
-
+  
   form: FormGroup;
   hide1 = true;
   hide2 = true;

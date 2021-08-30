@@ -71,7 +71,7 @@ export class ClientService {
   getClientsForAdmin(id){
     return this.server.request('GET', '/client/admin/' + id)
     .pipe(
-      tap((res:Response) => console.log(res)),
+      // tap((res:Response) => console.log(res)),
       map((res: any) => {
         return this.parseClientArray(res)
       })
