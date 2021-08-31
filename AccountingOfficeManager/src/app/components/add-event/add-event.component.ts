@@ -16,6 +16,8 @@ export class AddEventComponent implements OnInit {
   form: FormGroup;
   currentUser: User;
 
+  spinnerFlag = 0;
+
   constructor(
     public dialogRef: MatDialogRef<AddEventComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CalendarComponent,
@@ -37,6 +39,7 @@ export class AddEventComponent implements OnInit {
   }
 
   async onSubmit(){
+    this.spinnerFlag += 1
     await this.calendarService.saveCalendarEvent(
       this.currentUser.id,
       this.form.value["start_date"],
@@ -44,7 +47,9 @@ export class AddEventComponent implements OnInit {
       this.form.value["title"],
       this.form.value["all_day"],
     ).subscribe(x=>{
+      this.spinnerFlag -= 1
       // console.log("UMPA LUMPAS")
+      this.dialogRef.close();
     })
   }
 
