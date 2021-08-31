@@ -41,7 +41,7 @@
     <br />
 
     <mat-accordion class="accordion">
-        <mat-expansion-panel hideToggle>
+        <mat-expansion-panel [expanded]="true" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
               Documents
@@ -62,7 +62,7 @@
             <ng-container matColumnDef="download">
                 <th mat-header-cell *matHeaderCellDef> Download </th>
                 <td mat-cell *matCellDef="let element"> 
-                  <button mat-raised-button (click)="downloadFile()" color="warn">Download</button>
+                  <button mat-raised-button (click)="downloadFile(element.document_id)" color="warn">Download</button>
               </td>
           </ng-container>
   
