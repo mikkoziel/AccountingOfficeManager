@@ -86,7 +86,30 @@ export class ClientService {
         return this.parseDocumentArray(res);
       })
     );
-    
+  }
+
+  addDocument(data){
+    var document = {      
+      name: data["name"],
+      description: data["description"],
+      client:{
+        user_id: data["user_id"]
+      }
+    }
+    var fd = new FormData();
+    fd.append('file', data["file"], data["file"].name);
+    fd.append('document', JSON.stringify(document));
+    return this.server.request('POST', '/document/', fd)
+  }
+
+  getDocument(id){
+    return this.server.getFile('/document/' + id)
+    .pipe(
+      // tap((res)=>{console.log(res)}),
+      map((res)=>{
+        return new Blob([res], {type: 'application/pdf'})
+      })
+    )
   }
 
   parseClientArray(data): Client[] {
@@ -121,6 +144,7 @@ export class ClientService {
   parseDocument(data): Document{
     return <Document>{
       document_id: data["document_id"],
+      name: data["name"],
       path: data["path"],
       description: data["description"]
     }

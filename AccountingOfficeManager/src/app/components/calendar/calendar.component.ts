@@ -1,12 +1,10 @@
 import { Input, Component, TemplateRef, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-// import { Time, WeekDay } from '@angular/common';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
 import { AddEventComponent } from '../add-event/add-event.component';
-// import { addMinutes, addHours, endOfDay, startOfDay } from 'date-fns';
 
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
 		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
@@ -53,7 +51,6 @@ export class CalendarComponent implements OnInit{
   ngOnInit(){
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
-      // console.log(user)
       this.calendarService.getCalendarForUser(this.currentUser.id).subscribe(result=>{
         console.log(result)
         result.forEach(x=>{
@@ -67,8 +64,6 @@ export class CalendarComponent implements OnInit{
             }
           )
         })
-        this.spinnerFlag += 1
-        console.log(this.spinnerFlag)
       })
     })
   }

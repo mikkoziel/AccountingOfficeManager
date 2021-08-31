@@ -19,10 +19,10 @@
 
     <br />
     
-    <div *ngIf='currentUser.role!="USER"'>
+    <div *ngIf='currentUser.role!="CLIENT"'>
       <button mat-raised-button routerLink="/employees/{{currentUser.id}}" color="warn">Show employee profile</button>
     </div>
-    <div *ngIf='currentUser.role=="USER"'>
+    <div *ngIf='currentUser.role=="CLIENT"'>
       <button mat-raised-button routerLink="/clients/{{currentUser.id}}" color="warn">Show client profile</button>
     </div>
 

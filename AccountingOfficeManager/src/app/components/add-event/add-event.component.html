@@ -1,6 +1,7 @@
 <div class="div_container">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="event-form">
-      
+      <mat-progress-bar *ngIf="spinnerFlag==1" mode="indeterminate"></mat-progress-bar>
+  
       <h1>Add Event</h1>
       <mat-form-field class="login-full-width">
         <mat-label>Start Date</mat-label>
