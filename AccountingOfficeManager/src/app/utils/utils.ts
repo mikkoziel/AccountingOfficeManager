@@ -4,28 +4,26 @@ import { User } from "../entity/user";
 export function findInDictAfterCirc(data, search_key, search_value){
     let ret = undefined
     let flag = false
-    console.log("search_key: "+ search_key)
-    console.log("search_value: "+ search_value)
 
     finder(null, data)
 
     function finder(key, value){
-        console.log(key+ ': ' + value)
+        // console.log(key+ ': ' + value)
         if(value != null){
             if(key == search_key && value == search_value){
-                console.log("property")
+                // console.log("property")
                 flag = true
                 return
             }
             if(isArray(value)){
-                console.log("array")
+                // console.log("array")
                 for(let param_key in value){
                     finder(param_key, value[param_key])
                 }
                 return
             } 
             if(value.constructor == Object){
-                console.log("object")
+                // console.log("object")
                 for(let param_key in value){
                     finder(param_key, value[param_key])
                     if(flag){
@@ -34,11 +32,9 @@ export function findInDictAfterCirc(data, search_key, search_value){
                     }
                 }
                 return
-            
             }
         }
     }
-    // }
     return ret
 }
 
@@ -84,8 +80,10 @@ export function  refreshComponent(router) {
     }); 
 }
 
-export class ItemList {
-    constructor(public item: User, public selected?: boolean) {
-      if (selected === undefined) selected = false;
-    }
-  }
+export function getUserFromArrayById(arr: User[], id): User{
+    return arr.find(x => x.id === id);
+}
+
+export function getUserFromArrayByUsername(arr: User[], username): User{
+    return arr.find(x => x.username === username);
+}
