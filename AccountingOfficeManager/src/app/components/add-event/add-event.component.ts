@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
+import { ItemList } from 'src/app/utils/utils';
 import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
@@ -15,6 +16,8 @@ export class AddEventComponent implements OnInit {
   form: FormGroup;
   currentUser: User;
 
+  participants: Array<User>;
+  
   spinnerFlag = 0;
 
   constructor(
@@ -28,6 +31,10 @@ export class AddEventComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
+      this.userService.getParticipants(this.currentUser.id).subscribe(parts=>{
+        console.log(parts);
+        this.participants = parts;
+      })
     })
     this.form = this.fb.group({
       start_date: ['', Validators.required],
@@ -55,4 +62,6 @@ export class AddEventComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  
 }
