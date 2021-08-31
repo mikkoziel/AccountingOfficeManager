@@ -1,4 +1,4 @@
-<div class="div_container">  
+<div class="component_div">  
   <mat-progress-bar *ngIf="spinnerFlag!=2" mode="indeterminate"></mat-progress-bar>
   
     <h1>CLIENT COMPANY PROFILE</h1>
@@ -29,7 +29,7 @@
               Clients
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <table mat-table [dataSource]="clients" class="mat-elevation-z8 clients">
+          <table mat-table [dataSource]="clients" class="mat-elevation-z8 table">
  
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Id </th>

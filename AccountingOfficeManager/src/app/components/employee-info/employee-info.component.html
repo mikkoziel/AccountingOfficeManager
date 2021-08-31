@@ -1,4 +1,4 @@
-<div class="div_container">
+<div class="component_div">
   <mat-progress-bar *ngIf="spinnerFlag!=3" mode="indeterminate"></mat-progress-bar>
     
     <h1>EMPLOYEE PROFILE</h1>
@@ -36,7 +36,7 @@
         <br />
 
         <div *ngIf="clientsLoaded | async">
-          <form (ngSubmit)="assignClient()" class="register-form">
+          <form (ngSubmit)="assignClient()" class="form">
               <mat-form-field appearance="fill">
                   <mat-label>Assign Employee</mat-label>
                   <select matNativeControl [(ngModel)]="selectedClient" name="client_select" required>
@@ -61,7 +61,7 @@
               Employees
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <table mat-table [dataSource]="employees" class="mat-elevation-z8 clients">
+          <table mat-table [dataSource]="employees" class="mat-elevation-z8 table">
  
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -105,7 +105,7 @@
               Clients
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <table mat-table [dataSource]="clients" class="mat-elevation-z8 clients">
+          <table mat-table [dataSource]="clients" class="mat-elevation-z8 table">
  
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Id </th>
