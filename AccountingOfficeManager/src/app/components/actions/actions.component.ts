@@ -48,16 +48,18 @@ export class ActionsComponent implements OnInit {
   }
 
   addDocument(){
-    console.log(this.form.get('file').value.files[0])
     this.clientService.addDocument({
       name: this.form.get('name').value,
       description: this.form.get('description').value,
       file: this.form.get('file').value.files[0],
-      // comapny_id: this.currentUser.company.company_id,
       user_id: this.currentUser.id
     }).subscribe(()=>{
       refreshComponent(this.router)
     })
+  }
+
+  downloadFile(){
+
   }
 
 }
