@@ -86,7 +86,20 @@ export class ClientService {
         return this.parseDocumentArray(res);
       })
     );
-    
+  }
+
+  addDocument(data){
+    var document = {      
+      name: data["name"],
+      description: data["description"],
+      client:{
+        user_id: data["user_id"]
+      }
+    }
+    var fd = new FormData();
+    fd.append('file', data["file"], data["file"].name);
+    fd.append('document', JSON.stringify(document));
+    return this.server.request('POST', '/document/', fd)
   }
 
   parseClientArray(data): Client[] {
