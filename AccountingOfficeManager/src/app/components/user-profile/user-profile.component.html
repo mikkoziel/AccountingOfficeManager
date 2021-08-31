@@ -1,4 +1,4 @@
-<div class="div_container">
+<div class="component_div">
   <mat-progress-bar *ngIf="spinnerFlag==0" mode="indeterminate"></mat-progress-bar>
     
     <h1>YOUR PROFILE</h1>
@@ -35,8 +35,8 @@
             Change your password
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <form [formGroup]="form" (ngSubmit)="changePassword()" class="password-form">
-          <mat-form-field>
+        <form [formGroup]="form" (ngSubmit)="changePassword()" class="form password-form">
+          <mat-form-field appearance="fill">
               <mat-label>Enter your old password</mat-label>
               <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="old_password" required>
               <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
@@ -44,7 +44,7 @@
               </button>
           </mat-form-field>
     
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label>Enter your new password</mat-label>
             <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="new_password" required>
             <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
@@ -52,7 +52,7 @@
             </button>
           </mat-form-field>
         
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label>Repeat your new password</mat-label>
             <input matInput [type]="hide3 ? 'password' : 'text'" formControlName="rep_password" required>
             <button mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">

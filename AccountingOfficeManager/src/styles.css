@@ -4,3 +4,26 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.component_div {
+    margin: 2vh 5%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+mat-label {
+    color: black;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    /* color: white !important; */
+}
+
+.table {
+    width: 100vh;
+}

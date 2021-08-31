@@ -1,10 +1,10 @@
-<div class="div_container"> 
+<div class="component_div"> 
    <mat-progress-bar *ngIf="spinnerFlag!=0" mode="indeterminate"></mat-progress-bar>
     
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
       <h1>Register Client Company</h1>
       <p>Please enter details</p>
-      <mat-form-field class="login-full-width">
+      <mat-form-field class="login-full-width" appearance="fill">
         <mat-label>Name:</mat-label>
         <input matInput formControlName="name">
       </mat-form-field>

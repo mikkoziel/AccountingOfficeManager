@@ -1,20 +1,5 @@
-.div_container {
-    margin: 2vh 5%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
-.register-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
 ::ng-deep .mat-form-field-label {
-    color: white !important;
+    color: black !important;
 }
 
 ::ng-deep.mat-form-field-underline {
