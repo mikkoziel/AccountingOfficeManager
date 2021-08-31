@@ -69,4 +69,21 @@ export class ServerService {
       params
     });
   }
+
+  getFile(route: string, data?: any) {
+    const header = (this.loggedIn) ? { Authorization: `Bearer ${this.token}` } : undefined;
+
+    let params = new HttpParams();
+    if (data !== undefined) {
+      Object.getOwnPropertyNames(data).forEach(key => {
+        params = params.set(key, data[key]);
+      });
+    }
+
+    return this.http.get(this.APIEndpoint + route, {
+      responseType: "blob",
+      headers: header,
+      params
+    });
+  }
 }
