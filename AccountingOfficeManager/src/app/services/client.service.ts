@@ -105,7 +105,7 @@ export class ClientService {
   getDocument(id){
     return this.server.getFile('/document/' + id)
     .pipe(
-      tap((res)=>{console.log(res)}),
+      // tap((res)=>{console.log(res)}),
       map((res)=>{
         return new Blob([res], {type: 'application/pdf'})
       })
