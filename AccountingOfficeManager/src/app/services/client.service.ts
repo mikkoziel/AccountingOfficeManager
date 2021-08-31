@@ -102,6 +102,16 @@ export class ClientService {
     return this.server.request('POST', '/document/', fd)
   }
 
+  getDocument(id){
+    return this.server.getFile('/document/' + id)
+    .pipe(
+      tap((res)=>{console.log(res)}),
+      map((res)=>{
+        return new Blob([res], {type: 'application/pdf'})
+      })
+    )
+  }
+
   parseClientArray(data): Client[] {
     var clients = new Array<Client>();
     data.forEach(x=>
@@ -134,6 +144,7 @@ export class ClientService {
   parseDocument(data): Document{
     return <Document>{
       document_id: data["document_id"],
+      name: data["name"],
       path: data["path"],
       description: data["description"]
     }
