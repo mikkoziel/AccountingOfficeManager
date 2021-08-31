@@ -1,16 +1,16 @@
-<div class="div_container">
+<div class="component_div">
   <mat-progress-bar *ngIf="spinnerFlag==1" mode="indeterminate"></mat-progress-bar>
     
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
       
       <h1>Log In</h1>
       <p>Please login to continue</p>
-      <mat-form-field class="login-full-width">
+      <mat-form-field class="login-full-width" appearance="fill">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" required>
       </mat-form-field>
     
-      <mat-form-field>
+      <mat-form-field appearance="fill">
           <mat-label>Enter your password</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">

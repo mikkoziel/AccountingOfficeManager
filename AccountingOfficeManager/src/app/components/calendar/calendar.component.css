@@ -1,11 +1,3 @@
-.div_container {
-    margin: 2vh 5%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
 .calendar_own {
     color: black;
 }

@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
-import { createFalse } from 'typescript';
 import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
