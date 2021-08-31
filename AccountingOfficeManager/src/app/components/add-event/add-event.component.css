@@ -13,3 +13,11 @@
     align-content: center;
     /* color: white !important; */
 }
+
+mat-label {
+    color: black;
+}
+
+mat-checkbox {
+    color: black;
+}

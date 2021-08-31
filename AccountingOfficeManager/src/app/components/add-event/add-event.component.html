@@ -3,25 +3,23 @@
       <mat-progress-bar *ngIf="spinnerFlag==1" mode="indeterminate"></mat-progress-bar>
   
       <h1>Add Event</h1>
-      <mat-form-field class="login-full-width">
+      <mat-form-field class="login-full-width" appearance="fill">
         <mat-label>Start Date</mat-label>
         <input matInput formControlName="start_date" type="datetime-local" required>
       </mat-form-field>
       
-      <mat-form-field class="login-full-width">
+      <mat-form-field class="login-full-width" appearance="fill">
         <mat-label>End Date</mat-label>
         <input matInput formControlName="end_date" type="datetime-local" required>
       </mat-form-field>
 
-      <mat-form-field class="login-full-width">
+      <mat-form-field class="login-full-width" appearance="fill">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" required>
       </mat-form-field>
       
-      <mat-form-field class="login-full-width">
+      <mat-form-field class="login-full-width" appearance="fill">
         <input hidden=true matInput> 
-        <!-- <mat-label>All Day</mat-label>
-        <input matInput formControlName="all_day" type="checkbox" required> -->
         <mat-checkbox class="example-margin" formControlName="all_day" required>All Day</mat-checkbox>
       </mat-form-field>
 
