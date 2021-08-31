@@ -1,4 +1,5 @@
 import { Roles } from "../entity/role";
+import { User } from "../entity/user";
 
 export function findInDictAfterCirc(data, search_key, search_value){
     let ret = undefined
@@ -10,6 +11,7 @@ export function findInDictAfterCirc(data, search_key, search_value){
         // console.log(key+ ': ' + value)
         if(value != null){
             if(key == search_key && value == search_value){
+                // console.log("property")
                 flag = true
                 return
             }
@@ -24,17 +26,15 @@ export function findInDictAfterCirc(data, search_key, search_value){
                 // console.log("object")
                 for(let param_key in value){
                     finder(param_key, value[param_key])
-                }
-                if(flag){
-                    ret = value
-                    flag = false;
+                    if(flag){
+                        ret = value
+                        flag = false;
+                    }
                 }
                 return
-            
             }
         }
     }
-    // }
     return ret
 }
 
@@ -78,4 +78,12 @@ export function  refreshComponent(router) {
     router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         router.navigate([currentRoute]); 
     }); 
-  }
+}
+
+export function getUserFromArrayById(arr: User[], id): User{
+    return arr.find(x => x.id === id);
+}
+
+export function getUserFromArrayByUsername(arr: User[], username): User{
+    return arr.find(x => x.username === username);
+}

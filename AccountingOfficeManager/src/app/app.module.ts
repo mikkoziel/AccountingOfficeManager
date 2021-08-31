@@ -26,6 +26,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -88,6 +90,8 @@ const material = [
   MatProgressSpinnerModule,
   MatProgressBarModule,
   MaterialFileInputModule,
+  MatChipsModule,
+  MatAutocompleteModule,
 ]
 
 @NgModule({

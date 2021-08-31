@@ -23,6 +23,33 @@
         <mat-checkbox class="example-margin" formControlName="all_day" required>All Day</mat-checkbox>
       </mat-form-field>
 
+      <mat-form-field class="login-full-width" appearance="fill">
+        <mat-label>Add participants</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip
+            *ngFor="let part of selectedParts"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(part)">
+            {{part.username}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New participant..."
+            #partInput
+            [formControl]="partCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let part of filteredParts | async" [value]="part.id">
+            {{part.username}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
       <button class="button" mat-raised-button color="warn">Submit</button>
      </form>
      <div>

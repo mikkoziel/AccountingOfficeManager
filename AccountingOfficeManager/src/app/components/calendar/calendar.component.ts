@@ -39,7 +39,7 @@ export class CalendarComponent implements OnInit{
   
   activeDayIsOpen: boolean = true;
 
-  spinnerFlag = 0
+  spinnerFlag = 1
 
   constructor(
     private userService: UserService,
@@ -52,9 +52,9 @@ export class CalendarComponent implements OnInit{
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
       this.calendarService.getCalendarForUser(this.currentUser.id).subscribe(result=>{
-        console.log(result)
+        // console.log(result)
         result.forEach(x=>{
-          console.log(x)
+          // console.log(x)
           this.events.push(
             <CalendarEvent>{
               start: x.start_date,
@@ -78,7 +78,7 @@ export class CalendarComponent implements OnInit{
 
   openAddEvent(){
     let dialogRef = this.dialog.open(AddEventComponent, {
-      height: '400px',
+      height: '600px',
       width: '600px',
     });
     
