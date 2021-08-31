@@ -89,7 +89,7 @@ export class UserService {
   getParticipants(id){
     return this.server.request('GET', '/user/part/' + id)
     .pipe(
-      tap((res)=>{console.log(res)}),
+      // tap((res)=>{console.log(res)}),
       map((res)=>{
         return this.parseUserArray(res)
       })
@@ -108,10 +108,10 @@ export class UserService {
 
   checkUser(data, user){
     if(user.constructor == Object){
-      console.log("Object return user")
+      // console.log("Object return user")
       return user
     } else {
-      console.log("Nope look for user")
+      // console.log("Nope look for user")
       return findInDictAfterCirc(data, "user_id", user)
     }
   }
