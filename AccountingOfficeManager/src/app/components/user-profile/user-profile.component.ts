@@ -28,9 +28,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      old_password: ['', Validators.required],
-      new_password: ['', Validators.required],
-      rep_password: ['', Validators.required],
+      old_password: ['', [Validators.required, Validators.minLength(8)]],
+      new_password: ['', [Validators.required, Validators.minLength(8)]],
+      rep_password: ['', [Validators.required, Validators.minLength(8)]],
     });
 
     

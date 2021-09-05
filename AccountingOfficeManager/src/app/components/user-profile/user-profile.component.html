@@ -42,6 +42,12 @@
               <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
                 <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
+              <mat-error *ngIf="form.get('old_password').hasError('required')">
+                Old password required
+              </mat-error>
+              <mat-error *ngIf="form.get('old_password').hasError('minLength')">
+                Old password must be at least 8 characters
+              </mat-error>
           </mat-form-field>
     
           <mat-form-field appearance="fill">
@@ -50,6 +56,12 @@
             <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
               <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
+            <mat-error *ngIf="form.get('new_password').hasError('required')">
+              New password required
+            </mat-error>
+            <mat-error *ngIf="form.get('new_password').hasError('minLength')">
+              New password must be at least 8 characters
+            </mat-error>
           </mat-form-field>
         
           <mat-form-field appearance="fill">
@@ -58,6 +70,12 @@
             <button mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
               <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
+            <mat-error *ngIf="form.get('rep_password').hasError('required')">
+              Repeated password required
+            </mat-error>
+            <mat-error *ngIf="form.get('rep_password').hasError('minLength')">
+              Repeated password must be at least 8 characters
+            </mat-error>
           </mat-form-field>
           
           <button class="button" mat-raised-button color="warn">Submit</button>

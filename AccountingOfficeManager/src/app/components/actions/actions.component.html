@@ -15,11 +15,17 @@
             <mat-form-field class="login-full-width" appearance="fill">
               <mat-label>Name</mat-label>
               <input matInput formControlName="name" required>
+              <mat-error *ngIf="form.get('name').hasError('required')">
+                Name required
+            </mat-error>
             </mat-form-field>
           
             <mat-form-field class="login-full-width" appearance="fill">
                 <mat-label>Description</mat-label>
                 <input matInput formControlName="description" required>
+                <mat-error *ngIf="form.get('description').hasError('required')">
+                  Description required
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="login-full-width" appearance="fill">

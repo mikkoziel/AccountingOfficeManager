@@ -7,16 +7,28 @@
     <mat-form-field class="login-full-width" appearance="fill">
       <mat-label>Username:</mat-label>
       <input matInput formControlName="username">
+      <mat-error *ngIf="form.get('username').hasError('required')">
+        Username required
+      </mat-error>
+      <mat-error *ngIf="form.get('username').hasError('mail')">
+        Username must be email address
+      </mat-error>
     </mat-form-field>
   
     <mat-form-field class="login-full-width" appearance="fill">
       <mat-label>First Name:</mat-label>
       <input matInput  formControlName="first_name">
+      <mat-error *ngIf="form.get('first_name').hasError('required')">
+        First Name required
+      </mat-error>
     </mat-form-field>
     
     <mat-form-field class="login-full-width" appearance="fill">
       <mat-label>Last Name:</mat-label>
       <input matInput  formControlName="last_name">
+      <mat-error *ngIf="form.get('last_name').hasError('required')">
+        Last Name required
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -25,11 +37,20 @@
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error *ngIf="form.get('password').hasError('required')">
+        Password required
+      </mat-error>
+      <mat-error *ngIf="form.get('password').hasError('minLength')">
+        Password must be at least 8 characters
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="login-full-width" appearance="fill">
       <mat-label>Accounting Office Name:</mat-label>
       <input matInput  formControlName="ao_name">
+      <mat-error *ngIf="form.get('ao_name').hasError('required')">
+        Accounting Office Name required
+      </mat-error>
     </mat-form-field>
     
     <button mat-raised-button color="warn">Register</button>
