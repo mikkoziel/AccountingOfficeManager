@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Calendar } from '../entity/calendar';
+import { findInDictAfterCirc } from '../utils/utils';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -17,26 +18,41 @@ export class CalendarService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        var calendars = new Array<Calendar>();
-        res.forEach(x=>
-          calendars.push(this.parseCalendar(x))
-        );
-        return calendars;
+          return this.parseCalendarArray(res)
       })
     );
   }
 
-  saveCalendarEvent(user_id, start_date, end_date, title, all_day){
-    var data = {
-      "user":{
-        "user_id": user_id,
+  saveCalendarEvent(data){
+    var users = data["parts"].slice()
+    users.push(data["user"])
+    var tmp = {
+      "calendar":{         
+        "start_date": data["start_date"],
+        "end_date": data["end_date"],
+        "title": data["title"],
+        "all_day": data["all_day"],
       },
-      "start_date": start_date,
-      "end_date": end_date,
-      "title": title,
-      "all_day": all_day
+      "users": users 
     }
-    return this.server.request('POST', '/calendar/', data)
+    return this.server.request('POST', '/calendar/parts/', tmp)
+  }
+
+  parseCalendarArray(data): Calendar[]{
+    var calendars = new Array<Calendar>();
+    data.forEach(x=> {
+      let event = this.checkEvent(data, x)
+      calendars.push(this.parseCalendar(event))
+    });
+    return calendars;
+  }
+
+  checkEvent(data, event){
+    if(event.constructor == Object){
+      return event
+    } else {
+      return findInDictAfterCirc(data, "calendar_id", event)
+    }
   }
 
   parseCalendar(data): Calendar{
