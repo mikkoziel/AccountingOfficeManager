@@ -28,7 +28,6 @@ export class AddEventComponent implements OnInit {
   partCtrl = new FormControl();
   filteredParts: Observable<User[]>;
   selectedParts: User[] = [];
-  allParts: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
   @ViewChild('partInput') partInput: ElementRef<HTMLInputElement>;
   
@@ -46,12 +45,9 @@ export class AddEventComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
       this.userService.getParticipants(this.currentUser.id).subscribe(parts=>{
-        console.log(parts);
         this.participants = parts;
         this.filteredParts = this.partCtrl.valueChanges.pipe(
-          // startWith(null),
           map((part: string | null) => {
-            console.log(part)
             return part ? this._filter(part) : this.participants.slice()
           }));
       })
@@ -66,13 +62,14 @@ export class AddEventComponent implements OnInit {
 
   async onSubmit(){
     this.spinnerFlag += 1
-    await this.calendarService.saveCalendarEvent(
-      this.currentUser.id,
-      this.form.value["start_date"],
-      this.form.value["end_date"],
-      this.form.value["title"],
-      this.form.value["all_day"],
-    ).subscribe(x=>{
+    await this.calendarService.saveCalendarEvent({
+      user: this.currentUser,
+      start_date: this.form.value["start_date"],
+      end_date: this.form.value["end_date"],
+      title: this.form.value["title"],
+      all_day: this.form.value["all_day"],
+      parts: this.selectedParts
+    }).subscribe(()=>{
       this.spinnerFlag -= 1
       this.dialogRef.close();
     })
@@ -84,44 +81,39 @@ export class AddEventComponent implements OnInit {
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    console.log(value)
     if (value) {
       var user = getUserFromArrayById(this.participants, value);
       this.selectedParts.push(user);
-      console.log(this.selectedParts)
+      this.participants = this.participants.filter(obj => obj.id !== user.id);
     }
     event.chipInput!.clear();
     this.partCtrl.setValue(null);
   }
 
   remove(part: User): void {
-    // console.log(part)
-    // var user = getUserFromArrayById(this.participants, part);
     const index = this.selectedParts.indexOf(part);
     if (index >= 0) {
       this.selectedParts.splice(index, 1);
+      this.participants.push(part);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     var user = getUserFromArrayByUsername(this.participants, event.option.viewValue);
     this.selectedParts.push(user);
+    this.participants = this.participants.filter(obj => obj.id !== user.id);
     this.partInput.nativeElement.value = '';
     this.partCtrl.setValue(null);
   }
 
   private _filter(val: string): User[] {
-    console.log(val)
-    let filterValue;
+    let filterValue: string;
     if(isNaN(Number(val))){
       filterValue = val.toLowerCase();
-      console.log("string: "+ filterValue)
     } else{
       filterValue = getUserFromArrayById(this.participants, val).username;
-      console.log("number: "+ filterValue)
     }
     let filtered = this.participants.filter(user => user.username.toLowerCase().includes(filterValue));
-    console.log(filtered)
     return filtered;
   }
   
