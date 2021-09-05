@@ -1,6 +1,6 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
@@ -33,12 +33,15 @@ export class AddEventComponent implements OnInit {
   
   spinnerFlag = 0;
 
+  @ViewChild('warningDialog') warningDialog: TemplateRef<any>;
+
   constructor(
     public dialogRef: MatDialogRef<AddEventComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CalendarComponent,
     private fb: FormBuilder, 
     private calendarService: CalendarService,
     private userService: UserService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -61,18 +64,22 @@ export class AddEventComponent implements OnInit {
   }
 
   async onSubmit(){
-    this.spinnerFlag += 1
-    await this.calendarService.saveCalendarEvent({
-      user: this.currentUser,
-      start_date: this.form.value["start_date"],
-      end_date: this.form.value["end_date"],
-      title: this.form.value["title"],
-      all_day: this.form.value["all_day"],
-      parts: this.selectedParts
-    }).subscribe(()=>{
-      this.spinnerFlag -= 1
-      this.dialogRef.close();
-    })
+    if(this.checkSubmitDates(this.form.value["start_date"], this.form.value["end_date"])){
+      this.spinnerFlag += 1
+      await this.calendarService.saveCalendarEvent({
+        user: this.currentUser,
+        start_date: this.form.value["start_date"],
+        end_date: this.form.value["end_date"],
+        title: this.form.value["title"],
+        all_day: this.form.value["all_day"],
+        parts: this.selectedParts
+      }).subscribe(()=>{
+        this.spinnerFlag -= 1
+        this.dialogRef.close();
+      })
+    } else {
+      this.dialog.open(this.warningDialog);
+    }
   }
 
   onNoClick(): void {
@@ -116,6 +123,16 @@ export class AddEventComponent implements OnInit {
     let filtered = this.participants.filter(user => user.username.toLowerCase().includes(filterValue));
     return filtered;
   }
+
+  private checkSubmitDates(start, end): boolean{
+    return this.inFuture(start) &&
+          this.inFuture(end) &&
+          start < this.inFuture(end)
+  }
+
+  private inFuture(date: Date) {
+    return date > new Date()
+  };
   
 }
 

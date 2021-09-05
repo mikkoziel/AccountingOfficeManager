@@ -50,9 +50,21 @@
         </mat-autocomplete>
       </mat-form-field>
 
+      <mat-error *ngIf="form.valid">
+          Invalid value 
+      </mat-error>
+
       <button class="button" mat-raised-button color="warn">Submit</button>
      </form>
      <div>
         <button class="button" (click)="onNoClick()" mat-raised-button color="warn">Cancel</button>
      </div>
 </div>
+
+<ng-template #warningDialog>
+  <h2 matDialogTitle>Wrong value</h2>
+  <p matDialogContent><em>You put wrong values into form</em></p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>Dismiss</button>
+  </mat-dialog-actions>
+</ng-template>
