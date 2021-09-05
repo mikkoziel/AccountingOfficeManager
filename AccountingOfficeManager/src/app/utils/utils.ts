@@ -1,3 +1,4 @@
+import { ValidationErrors } from "@angular/forms";
 import { Roles } from "../entity/role";
 import { User } from "../entity/user";
 
@@ -86,4 +87,29 @@ export function getUserFromArrayById(arr: User[], id): User{
 
 export function getUserFromArrayByUsername(arr: User[], username): User{
     return arr.find(x => x.username === username);
+}
+
+export interface FormError{
+    key: string;
+    keyError: string;
+    errorValue: string;
+}
+
+export function getFormValidationErrors(form) {
+    let errors: FormError[] = []
+    Object.keys(form.controls).forEach(key => {
+        const controlErrors: ValidationErrors = form.get(key).errors;
+        if (controlErrors != null) {
+            Object.keys(controlErrors).forEach(keyError => {
+                errors.push(
+                    <FormError>{
+                        key: key,
+                        keyError: keyError,
+                        errorValue: controlErrors[keyError]
+                    }
+                )
+           });
+        }
+    });
+    return errors;
 }
