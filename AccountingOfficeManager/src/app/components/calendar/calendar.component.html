@@ -1,83 +1,87 @@
 <div class="component_div">
-   <mat-progress-bar *ngIf="spinnerFlag!=1" mode="indeterminate"></mat-progress-bar>
+   <mat-progress-bar *ngIf="spinnerFlag==0" mode="indeterminate"></mat-progress-bar>
   
     <h1>YOUR CALENDAR</h1>
    
-    <div class="row text-center">
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div
-            class="btn btn-primary"
-            mwlCalendarPreviousView
-            [view]="view"
-            [(viewDate)]="viewDate"
-            (viewDateChange)="closeOpenMonthViewDay()"
-          >
-            Previous
+    <div *ngIf="eventsLoaded | async">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Previous
+            </div>
+            <div
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate"
+            >
+              Today
+            </div>
+            <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()"
+            >
+              Next
+            </div>
           </div>
-          <div
-            class="btn btn-outline-secondary"
-            mwlCalendarToday
-            [(viewDate)]="viewDate"
-          >
-            Today
-          </div>
-          <div
-            class="btn btn-primary"
-            mwlCalendarNextView
-            [view]="view"
-            [(viewDate)]="viewDate"
-            (viewDateChange)="closeOpenMonthViewDay()"
-          >
-            Next
+        </div>
+        <div class="col-md-4">
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month"
+            >
+              Month
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week"
+            >
+              Week
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-      </div>
-      <div class="col-md-4">
-        <div class="btn-group">
-          <div
-            class="btn btn-primary"
-            (click)="setView(CalendarView.Month)"
-            [class.active]="view === CalendarView.Month"
-          >
-            Month
-          </div>
-          <div
-            class="btn btn-primary"
-            (click)="setView(CalendarView.Week)"
-            [class.active]="view === CalendarView.Week"
-          >
-            Week
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    
-    <div [ngSwitch]="view">
-      <mwl-calendar-month-view
-        *ngSwitchCase="CalendarView.Month"
-        [viewDate]="viewDate"
-        [events]="events"
-        [refresh]="refresh"
-        [activeDayIsOpen]="activeDayIsOpen"
-        class="calendar_own"
-      >
-      </mwl-calendar-month-view>
-      <mwl-calendar-week-view
-        *ngSwitchCase="CalendarView.Week"
+      <br />
+      
+      <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+          *ngSwitchCase="CalendarView.Month"
           [viewDate]="viewDate"
+          [weekStartsOn]="weekStartsOn"
           [events]="events"
-          [dayEndHour]="dayEndHour"
-          [dayStartHour]="dayStartHour"
-          [hourSegments]="4"
-          [hourSegmentHeight]="15"
+          [refresh]="refresh"
+          [activeDayIsOpen]="activeDayIsOpen"
           class="calendar_own"
-      >
-      </mwl-calendar-week-view>
+        >
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+          *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [weekStartsOn]="weekStartsOn"
+            [events]="events"
+            [dayEndHour]="dayEndHour"
+            [dayStartHour]="dayStartHour"
+            [hourSegments]="4"
+            [hourSegmentHeight]="15"
+            class="calendar_own"
+        >
+        </mwl-calendar-week-view>
+      </div>
     </div>
     <button class="button" (click)="openAddEvent()" mat-raised-button color="warn">Add event</button>
  

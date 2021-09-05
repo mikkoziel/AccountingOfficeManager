@@ -1,9 +1,11 @@
-import { Input, Component, TemplateRef, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Input, Component, TemplateRef, OnInit, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
+import { refreshComponent } from 'src/app/utils/utils';
 import { AddEventComponent } from '../add-event/add-event.component';
 
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
@@ -28,10 +30,11 @@ export class CalendarComponent implements OnInit{
   
   view: CalendarView = CalendarView.Week;
   viewDate: Date = new Date();
-  dayStartHour: number = 5;
+  dayStartHour: number = 0;
   dayEndHour: number = 24;
 
   events: CalendarEvent[] = [];
+  eventsLoaded: Promise<boolean>;
 
   excludeDays: number[] = [0, 6];
   weekStartsOn = DAYS_OF_WEEK.MONDAY;
@@ -39,31 +42,34 @@ export class CalendarComponent implements OnInit{
   
   activeDayIsOpen: boolean = true;
 
-  spinnerFlag = 1
+  spinnerFlag = 0;
 
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private calendarService: CalendarService
+    private calendarService: CalendarService,
+    private cd: ChangeDetectorRef,
+    private router: Router,
     ) {
   }
 
   ngOnInit(){
     this.userService.getCurrentUser().subscribe(user =>{
       this.currentUser = user;
-      this.calendarService.getCalendarForUser(this.currentUser.id).subscribe(result=>{
-        // console.log(result)
+      this.calendarService.getCalendarForUser(this.currentUser.id).subscribe(result =>{
+        console.log(result)
+        this.eventsLoaded = Promise.resolve(true)
+        this.spinnerFlag += 1;
         result.forEach(x=>{
-          // console.log(x)
-          this.events.push(
-            <CalendarEvent>{
-              start: x.start_date,
-              end: x.end_date,
-              title: x.title,
-              allDay: x.all_day
-            }
-          )
+          console.log(x)
+          this.events = [
+            ...this.events,
+            this.parseCalendarEvent(x)
+          ]
         })
+        console.log(this.events)
+        console.log(this.eventsLoaded)
+        this.cd.detectChanges();
       })
     })
   }
@@ -84,6 +90,20 @@ export class CalendarComponent implements OnInit{
     
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      refreshComponent(this.router);
     });
+  }
+
+  parseCalendarEvent(event){
+    return <CalendarEvent>{
+      start: event.start_date,
+      end: event.end_date,
+      title: event.title,
+      allDay: event.all_day,
+      color: {
+        primary: colorArray[0], 
+        secondary: colorArray[1]
+      },
+    }
   }
 }
