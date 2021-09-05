@@ -1,12 +1,13 @@
 import { Input, Component, TemplateRef, OnInit, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
+import { CalendarEvent, CalendarEventTitleFormatter, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { User } from 'src/app/entity/user';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { UserService } from 'src/app/services/user.service';
 import { refreshComponent } from 'src/app/utils/utils';
 import { AddEventComponent } from '../add-event/add-event.component';
+import { CustomEventTitleFormatter } from './custom-event-title-formatter';
 
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
 		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
@@ -23,7 +24,13 @@ var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  providers: [
+    {
+      provide: CalendarEventTitleFormatter,
+      useClass: CustomEventTitleFormatter,
+    },
+  ],
 })
 export class CalendarComponent implements OnInit{
   currentUser: User;
