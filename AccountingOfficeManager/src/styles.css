@@ -16,6 +16,10 @@ mat-label {
     color: black;
 }
 
+input {
+    color: black;
+}
+
 mat-form-field {
     background-color: white;
 }
