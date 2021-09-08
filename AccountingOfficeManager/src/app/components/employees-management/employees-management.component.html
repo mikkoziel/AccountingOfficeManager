@@ -5,7 +5,7 @@
     <button class="button" (click)="addNewEmployee()" mat-raised-button color="warn">Add employee</button>
  
     <br />
-    <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+    <table mat-table [dataSource]="employees" matSort class="mat-elevation-z8">
  
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> Id </th>
