@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { User } from 'src/app/entity/user';
 import { WorkLog } from 'src/app/entity/worklog';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './work-management.component.html',
   styleUrls: ['./work-management.component.css']
 })
-export class WorkManagementComponent implements OnInit {
+export class WorkManagementComponent implements OnInit, AfterViewInit  {
   currentUser: User;
 
   worklogs: Array<WorkLog>;
@@ -22,6 +23,8 @@ export class WorkManagementComponent implements OnInit {
   interval;
 
   spinnerFlag = 0;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private userService: UserService,
@@ -38,6 +41,10 @@ export class WorkManagementComponent implements OnInit {
         this.spinnerFlag += 1;
       })
     })
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   startTimer() {
