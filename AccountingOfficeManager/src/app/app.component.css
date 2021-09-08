@@ -13,7 +13,7 @@
 
 .navbar {
     /* background-color: rgb(30, 214, 30)!important; */
-    background-color: rgba(95, 95, 95)!important;
+    background-color: rgb(83, 186, 255)!important;
     color: white;
     border-bottom: 4px black;
 }
@@ -24,6 +24,6 @@
 
 .container_class {
     min-height: 100vh;
-    background: rgb(97, 0, 0);
-    color: white;
+    background: rgb(230, 230, 230);
+    color: black;
 }
