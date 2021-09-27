@@ -1,0 +1,45 @@
+{
+	"app": {
+		"home": "Strona domowa",
+		"title": "Menadżer Biura Rachunkowego"
+	},
+	"home": {
+		"greeting": "Witamy w Zarządzaniu Biurem Rachunkowym",
+		"login": {
+			"label": "Zaloguj się:",
+			"login": "Logowanie"
+		},
+		"register": {
+			"label": "Lub Zarejestruj",
+			"register": "Rejestracja"
+		}
+	},
+	"register": {
+		"aoname": {
+			"label": "Nazwa Biura Rachunkowego:",
+			"required": "Nazwa Biura Rachunkowego wymagane"
+		},
+		"command": "Wprowadź swoje dane",
+		"firstname": {
+			"label": "Imię:",
+			"required": "Imię wymagane"
+		},
+		"header": "Rejestracja",
+		"lastname": {
+			"label": "Nazwisko:",
+			"required": "Nazwisko wymagane"
+		},
+		"login": "Zaloguj się tutaj!",
+		"password": {
+			"char": "Hasło musi zawierać przynajmniej 8 znaków",
+			"label": "Wprowadź swoje hasło:",
+			"required": "Hasło wymagane"
+		},
+		"register": "Rejestracja",
+		"username": {
+			"email": "Nazwa użytkownika musi być adresem e-mail",
+			"label": "Nazwa użytkownika:",
+			"required": "Nazwa użytkownika wymagana"
+		}
+	}
+}

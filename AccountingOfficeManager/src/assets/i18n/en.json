@@ -1,0 +1,45 @@
+{
+	"app": {
+		"home": "home",
+		"title": "Accounting Office Manager"
+	},
+	"home": {
+		"greeting": "Welcome to Accounting Office Manager",
+		"login": {
+			"label": "Please Login:",
+			"login": "Login"
+		},
+		"register": {
+			"label": "Or Register",
+			"register": "Register"
+		}
+	},
+	"register": {
+		"aoname": {
+			"label": "Accounting Office Name:",
+			"required": "Accounting Office Name required"
+		},
+		"command": "Please enter your details",
+		"firstname": {
+			"label": "First Name:",
+			"required": "First Name required"
+		},
+		"header": "Sign Up",
+		"lastname": {
+			"label": "Last Name:",
+			"required": "Last Name required"
+		},
+		"login": "Login Here!",
+		"password": {
+			"char": "Password must be at least 8 characters",
+			"label": "Enter your passowrd:",
+			"required": "Password required"
+		},
+		"register": "Register",
+		"username": {
+			"email": "Username must be email address",
+			"label": "Username:",
+			"required": "Username required"
+		}
+	}
+}
