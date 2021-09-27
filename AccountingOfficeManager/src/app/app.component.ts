@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from './entity/user';
 import { AuthService } from './services/auth.service';
+import { LanguageService } from './services/language.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -18,7 +20,10 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
-    ) {}
+    private langService: LanguageService
+    ) {
+      this.langService.setDefaultLang('pl');
+    }
 
     
   ngOnInit(): void {
@@ -40,5 +45,9 @@ export class AppComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  changeLang(lang) {
+    this.langService.useLanguage(lang);
   }
 }
