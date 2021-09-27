@@ -3,36 +3,40 @@
     
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
       
-      <h1>Log In</h1>
-      <p>Please login to continue</p>
+      <h1 translate>login.header</h1>
+      <p translate>login.command</p>
       <mat-form-field class="login-full-width" appearance="fill">
-        <mat-label>Username</mat-label>
+        <mat-label translate>login.username.label</mat-label>
         <input matInput formControlName="username" required>
         <mat-error *ngIf="form.get('username').hasError('email')">
-          Username must be email address
+          <span translate>login.username.mail</span>
         </mat-error>
         <mat-error *ngIf="form.get('username').hasError('required')">
-          Username required
+          <span translate>login.username.required</span>
         </mat-error>
       </mat-form-field>
     
       <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
+          <mat-label translate>login.password.label</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="form.get('password').hasError('required')">
-            Password required
+            <span translate>login.password.required</span>
           </mat-error>
           <mat-error *ngIf="form.get('password').hasError('minLength')">
-            Password must be at least 8 characters
+            <span translate>login.password.char</span>
           </mat-error>
       </mat-form-field>
       
-      <button class="button" mat-raised-button color="warn">Submit</button>
+      <button class="button" mat-raised-button color="warn">
+        <span translate>login.login</span>
+      </button>
     </form>
     <div>
-      <button mat-raised-button routerLink="/register" color="warn">Not yet registered?</button>
+      <button mat-raised-button routerLink="/register" color="warn">
+        <span translate>login.register</span>
+      </button>
     </div>
 </div>
