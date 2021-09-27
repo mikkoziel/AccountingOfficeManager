@@ -2,61 +2,61 @@
   <mat-progress-bar *ngIf="spinnerFlag!=0" mode="indeterminate"></mat-progress-bar>
     
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
-    <h1>Sign Up</h1>
-    <p>Please enter your details</p>
+    <h1 translate>register.header</h1>
+    <p translate>register.command</p>
     <mat-form-field class="login-full-width" appearance="fill">
-      <mat-label>Username:</mat-label>
+      <mat-label translate>register.username.label</mat-label>
       <input matInput formControlName="username">
       <mat-error *ngIf="form.get('username').hasError('required')">
-        Username required
+        <span translate>register.username.required</span>
       </mat-error>
       <mat-error *ngIf="form.get('username').hasError('mail')">
-        Username must be email address
+        <span translate>register.username.email</span>
       </mat-error>
     </mat-form-field>
   
     <mat-form-field class="login-full-width" appearance="fill">
-      <mat-label>First Name:</mat-label>
+      <mat-label translate>register.firstname.label</mat-label>
       <input matInput  formControlName="first_name">
       <mat-error *ngIf="form.get('first_name').hasError('required')">
-        First Name required
+        <span translate>register.firstname.required</span>
       </mat-error>
     </mat-form-field>
     
     <mat-form-field class="login-full-width" appearance="fill">
-      <mat-label>Last Name:</mat-label>
+      <mat-label translate>register.lastname.label</mat-label>
       <input matInput  formControlName="last_name">
       <mat-error *ngIf="form.get('last_name').hasError('required')">
-        Last Name required
+        <span translate>register.lastname.required</span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
+      <mat-label translate>register.password.label</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
       <mat-error *ngIf="form.get('password').hasError('required')">
-        Password required
+        <span translate>register.password.required</span>
       </mat-error>
       <mat-error *ngIf="form.get('password').hasError('minLength')">
-        Password must be at least 8 characters
+        <span translate>register.password.char</span>
       </mat-error>
     </mat-form-field>
 
     <mat-form-field class="login-full-width" appearance="fill">
-      <mat-label>Accounting Office Name:</mat-label>
+      <mat-label translate>register.aoname.label</mat-label>
       <input matInput  formControlName="ao_name">
       <mat-error *ngIf="form.get('ao_name').hasError('required')">
-        Accounting Office Name required
+        <span translate>register.aoname.required</span>
       </mat-error>
     </mat-form-field>
     
-    <button mat-raised-button color="warn">Register</button>
+    <button mat-raised-button color="warn"><span translate>register.register</span></button>
   </form>
   <div class="login-link">
-    <button mat-raised-button routerLink="/login" color="warn">Login Here!</button>
+    <button mat-raised-button routerLink="/login" color="warn"><span translate>register.login</span></button>
   </div>
 
 </div>
