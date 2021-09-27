@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -56,6 +56,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const components = [
   AppComponent,
@@ -122,13 +124,24 @@ const material = [
         tokenGetter: () => {
              return     localStorage.getItem('access_token');
           },
-        allowedDomains: [environment.APIEndpoint],
-        disallowedRoutes: [environment.APIEndpoint + " /login"]
+        allowedDomains: [environment.APIEndpoint, location.origin],
+        disallowedRoutes: [environment.APIEndpoint + "/login"]
       }
     }),
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    })
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
   schemas :[CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
