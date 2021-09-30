@@ -55,11 +55,11 @@ export class CompanyService {
   }
 
   getCompanyInfo(id){
-    return this.server.request('GET', '/company-info/' + id)
+    return this.server.request('GET', '/cc/cc-info/' + id)
     .pipe(
       // tap((res:any)=> console.log(res)),
       map((res:any)=> {
-        return this.parser.parseCompany(res);
+        return this.parser.parseCompanyInfo(res);
       })
     )
   }
