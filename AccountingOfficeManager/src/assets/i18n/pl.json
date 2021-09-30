@@ -3,6 +3,28 @@
 		"home": "Strona domowa",
 		"title": "Menadżer Biura Rachunkowego"
 	},
+	"document": {
+		"add": {
+			"desc": {
+				"label": "Opis",
+				"required": "Opis wymagany"
+			},
+			"file": {
+				"label": "Dodaj plik",
+				"required": "Wybierz plik"
+			},
+			"name": {
+				"label": "Nazwa",
+				"required": "Nazwa wymagana"
+			},
+			"submit": "Dodaj",
+			"title": "Dodaj Dokument"
+		},
+		"files": {
+			"label": "Dokumenty"
+		},
+		"header": "Dokumenty"
+	},
 	"home": {
 		"greeting": "Witamy w Zarządzaniu Biurem Rachunkowym",
 		"login": {

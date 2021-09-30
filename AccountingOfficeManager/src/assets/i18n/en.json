@@ -3,6 +3,28 @@
 		"home": "home",
 		"title": "Accounting Office Manager"
 	},
+	"document": {
+		"add": {
+			"desc": {
+				"label": "Description",
+				"required": "Description required"
+			},
+			"file": {
+				"label": "Upload file",
+				"required": "Please select a file"
+			},
+			"name": {
+				"label": "Name",
+				"required": "Name required"
+			},
+			"submit": "Submit",
+			"title": "Add Document"
+		},
+		"files": {
+			"label": "Documents"
+		},
+		"header": "Documents"
+	},
 	"home": {
 		"greeting": "Welcome to Accounting Office Manager",
 		"login": {

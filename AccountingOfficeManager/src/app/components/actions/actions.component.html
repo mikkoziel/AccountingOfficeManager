@@ -1,45 +1,49 @@
 <div class="component_div"> 
     <mat-progress-bar *ngIf="spinnerFlag!=1" mode="indeterminate"></mat-progress-bar>
   
-    <h1>DOCUMENTS</h1>
+    <h1 translate>document.header</h1>
 
     <mat-accordion class="accordion">
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Add Document
+            <mat-panel-title translate>
+              document.add.title
             </mat-panel-title>
           </mat-expansion-panel-header>
           <form [formGroup]="form" (ngSubmit)="addDocument()" class="form">
       
             <mat-form-field class="login-full-width" appearance="fill">
-              <mat-label>Name</mat-label>
+              <mat-label translate>document.add.name.label</mat-label>
               <input matInput formControlName="name" required>
               <mat-error *ngIf="form.get('name').hasError('required')">
-                Name required
+                <span translate>document.add.name.required</span>>
             </mat-error>
             </mat-form-field>
           
             <mat-form-field class="login-full-width" appearance="fill">
-                <mat-label>Description</mat-label>
+                <mat-label translate>document.add.desc.label</mat-label>
                 <input matInput formControlName="description" required>
                 <mat-error *ngIf="form.get('description').hasError('required')">
-                  Description required
+                  <span translate>document.add.desc.required</span>>
               </mat-error>
             </mat-form-field>
 
             <mat-form-field class="login-full-width" appearance="fill">
-                <ngx-mat-file-input #removableInput formControlName="file" [accept]="'.pdf'" placeholder="Upload file">Upload file</ngx-mat-file-input>
+                <ngx-mat-file-input #removableInput formControlName="file" [accept]="'.pdf'" placeholder="Upload file">
+                  <span translate>document.add.file.label</span>>
+                </ngx-mat-file-input>
                 <input hidden=true matInput> 
                 <mat-icon matSuffix *ngIf="removableInput.empty">folder</mat-icon>
                 <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
                   <mat-icon>clear</mat-icon>
                 </button>
                 <mat-error *ngIf="form.get('file').hasError('required')">
-                    Please select a file
+                  <span translate>document.add.file.required</span>>
                 </mat-error>
             </mat-form-field>
-            <button class="button" mat-raised-button color="warn">Submit</button>
+            <button class="button" mat-raised-button color="warn">
+              <span translate>document.add.submit</span>
+            </button>
           </form>
         </mat-expansion-panel>  
     </mat-accordion>
@@ -49,8 +53,8 @@
     <mat-accordion class="accordion">
         <mat-expansion-panel [expanded]="true" hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Documents
+            <mat-panel-title translate>
+              document.files.label
             </mat-panel-title>
           </mat-expansion-panel-header>
           <table mat-table [dataSource]="documents" class="mat-elevation-z8 table">
