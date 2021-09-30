@@ -55,4 +55,14 @@ export class EmployeeService {
     return this.server.request('POST', '/work-log/', data)
   }
 
+  getEmployeeInfo(id){
+    return this.server.request('GET', '/employee/e-info/' + id)
+      .pipe(
+        // tap((res:Response) => console.log(res)),
+        map((res: any) => { 
+          return this.parser.parseEmployeeInfo(res) 
+        })
+      );
+  }
+
 }

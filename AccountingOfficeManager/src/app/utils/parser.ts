@@ -51,20 +51,24 @@ export class Parser{
   parseClientInfo(res){
     return {
       "client": this.parseClient(res["client"]),
-      "documents": this.parseDocumentArrayFromClientInfo(res["documents"], res)
+      "documents": this.parseDocumentArrayFromRes(res["documents"], res)
     }
   }
 
   parseCompanyInfo(res){
     return {
-      "company": this.parseCCFromCompanyInfo(res["company"], res),
-      "clients": this.parseClientArrayFromCCInfo(res["clients"], res)
+      "company": this.parseCCFromRes(res["company"], res),
+      "clients": this.parseClientArrayFromRes(res["clients"], res)
     }
   }
 
-  parseCCFromCompanyInfo(data, res){
-    let cc = this.checkElementById(res, data, "company_id")
-    return this.parseClientCompany(cc)
+  parseEmployeeInfo(res){
+    return {
+      "employee" : this.parseEmployee(res["employee"]),
+      "clients": this.parseClientArray(res["clients"]),
+      "employees": this.parseEmployeeArray(res["employees"]),
+      "adminClients": this.parseClientArray(res["adminClients"])
+    }
   }
 
 // ARRAY PARSERS ----------------------------------------
@@ -75,16 +79,6 @@ export class Parser{
       calendars.push(this.parseCalendar(event))
     });
     return calendars;
-  }
-
-  parseDocumentArrayFromClientInfo(data, res): Document[]{
-    var documents = new Array<Document>();
-    data.forEach(x=> {
-      let doc = this.checkElementById(res, x, "document_id");
-      documents.push(this.parseDocument(doc))
-    });
-    console.log(documents)
-    return documents;
   }
   
   parseDocumentArray(data): Document[]{
@@ -101,15 +95,6 @@ export class Parser{
     var clients = new Array<Client>();
     data.forEach(x=> {
       let client = this.checkElementById(data, x, "user_id");
-      clients.push(this.parseClient(client))
-    });
-    return clients;
-  }
-  
-  parseClientArrayFromCCInfo(data, res): Client[] {
-    var clients = new Array<Client>();
-    data.forEach(x=> {
-      let client = this.checkElementById(res, x, "user_id");
       clients.push(this.parseClient(client))
     });
     return clients;
@@ -148,6 +133,30 @@ export class Parser{
       users.push(this.parseUser(user))
     });
     return users;
+  }
+// ARRAY PARSERS FROM RES --------------------------------
+  parseClientArrayFromRes(data, res): Client[] {
+    var clients = new Array<Client>();
+    data.forEach(x=> {
+      let client = this.checkElementById(res, x, "user_id");
+      clients.push(this.parseClient(client))
+    });
+    return clients;
+  }
+
+  parseDocumentArrayFromRes(data, res): Document[]{
+    var documents = new Array<Document>();
+    data.forEach(x=> {
+      let doc = this.checkElementById(res, x, "document_id");
+      documents.push(this.parseDocument(doc))
+    });
+    console.log(documents)
+    return documents;
+  }
+
+  parseCCFromRes(data, res){
+    let cc = this.checkElementById(res, data, "company_id")
+    return this.parseClientCompany(cc)
   }
   
 // SIMPLE PARSERS ----------------------------------------
