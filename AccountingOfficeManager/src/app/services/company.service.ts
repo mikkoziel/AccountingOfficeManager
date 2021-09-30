@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
-import { ClientCompany } from '../entity/clientCompany';
-import { Company } from '../entity/company';
-import { Document } from '../entity/document';
+import { Parser } from '../utils/parser';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -12,13 +10,16 @@ export class CompanyService {
 
   constructor(
     private server: ServerService,
+    private parser: Parser
     ) { }
 
   getCompany(id){
     return this.server.request('GET', '/company/' + id)
     .pipe(
-      tap((res:any)=> console.log(res)),
-      map((res:any)=> {return this.parseCompany(res)})
+      // tap((res:any)=> console.log(res)),
+      map((res:any)=> {
+        return this.parser.parseCompany(res);
+      })
     )
   }
 
@@ -28,11 +29,7 @@ export class CompanyService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        var documents = new Array<Document>();
-        res.forEach(x=>
-          documents.push(this.parseDocument(x))
-        );
-        return documents;
+        return this.parser.parseDocumentArray(res);
       })
     );
     
@@ -52,34 +49,19 @@ export class CompanyService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        var clients = new Array<ClientCompany>();
-        res.forEach(x=>
-          clients.push(this.parseClientCompany(x))
-        );
-        return clients;
+        return this.parser.parseCCArray(res);
       })
     );
   }
 
-  parseCompany(data): Company{
-    return <Company>{
-      company_id: data["company_id"],
-      name: data["name"],
-    }
+  getCompanyInfo(id){
+    return this.server.request('GET', '/company-info/' + id)
+    .pipe(
+      // tap((res:any)=> console.log(res)),
+      map((res:any)=> {
+        return this.parser.parseCompany(res);
+      })
+    )
   }
 
-  parseClientCompany(data): ClientCompany{
-      return <ClientCompany>{
-        company_id: data["company_id"],
-        name: data["name"],
-      }
-  }
-
-  parseDocument(data): Document{
-    return <Document>{
-      document_id: data["document_id"],
-      path: data["path"],
-      description: data["description"]
-    }
-  }
 }

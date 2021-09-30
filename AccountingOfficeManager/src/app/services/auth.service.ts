@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
+import { Parser } from '../utils/parser';
 import { ServerService } from './server.service';
 import { UserService } from './user.service';
 
@@ -18,7 +19,8 @@ export class AuthService {
   constructor(
     private router: Router, 
     private server: ServerService,
-    private userService: UserService
+    private userService: UserService,
+    private parser: Parser
     ) {
       // console.log('Auth Service');
       const userData = localStorage.getItem('user');
@@ -47,7 +49,7 @@ export class AuthService {
           };
           localStorage.setItem('user', JSON.stringify(userData));  
 
-          this.server.currentUser.next(this.userService.parseUser(response.body))
+          this.server.currentUser.next(this.parser.parseUser(response.body))
           // console.log(this.server.currentUser)
           this.router.navigateByUrl('/user-home');
         }

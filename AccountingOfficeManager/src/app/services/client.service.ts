@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Client } from '../entity/client';
-import { Document } from '../entity/document';
-import { findInDictAfterCirc, getRole } from '../utils/utils';
-import { CompanyService } from './company.service';
+import { Parser } from '../utils/parser';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -13,7 +11,7 @@ export class ClientService {
 
   constructor(
     private server: ServerService,
-    private cService: CompanyService
+    private parser: Parser
     ) { }
 
   getClient(id){
@@ -21,7 +19,7 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        return this.parseClient(res);
+        return this.parser.parseClient(res);
       })
     );
   }
@@ -49,11 +47,7 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        var clients = new Array<Client>();
-        res.forEach(x=>
-          clients.push(this.parseClient(x))
-        );
-        return clients;
+        return this.parser.parseClientArray(res);
       })
     );
   }
@@ -63,7 +57,7 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        return this.parseClientArray(res)
+        return this.parser.parseClientArray(res);
       })
     );
   }
@@ -73,7 +67,7 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res: any) => {
-        return this.parseClientArray(res)
+        return this.parser.parseClientArray(res)
       })
     )
   }
@@ -83,7 +77,7 @@ export class ClientService {
     .pipe(
       // tap((res:Response) => console.log(res)),
       map((res:any) => {
-        return this.parseDocumentArray(res);
+        return this.parser.parseDocumentArray(res);
       })
     );
   }
@@ -99,6 +93,7 @@ export class ClientService {
     var fd = new FormData();
     fd.append('file', data["file"], data["file"].name);
     fd.append('document', JSON.stringify(document));
+
     return this.server.request('POST', '/document/', fd)
   }
 
@@ -117,75 +112,9 @@ export class ClientService {
     .pipe(
       tap((res:Response) => console.log(res)),
       map((res:any) => {
-        return this.parseClientInfo(res);
+        return this.parser.parseClientInfo(res);
       })
     );
-  }
-
-  parseClientInfo(res){
-    return {
-      "client": this.parseClient(res["client"]),
-      "documents": this.parseDocumentArrayFromClientInfo(res["documents"], res)
-    }
-  }
-
-  parseClientArray(data): Client[] {
-    var clients = new Array<Client>();
-    data.forEach(x=>
-      clients.push(this.parseClient(x))
-    );
-    return clients;
-  }
-
-  parseClient(data): Client{
-    let role_check = getRole(data["roles"])
-      return <Client>{
-        id: data["user_id"],
-        employee_id: data["employee"],
-        company: this.cService.parseClientCompany(data["company"]),
-        first_name: data["first_name"],
-        last_name: data["last_name"],
-        username: data["username"],
-        role: role_check,
-      }
-  }
-
-  parseDocumentArrayFromClientInfo(data, docs): Document[]{
-    var documents = new Array<Document>();
-    data.forEach(x=> {
-      let doc = this.checkDocument(docs, x);
-      documents.push(this.parseDocument(doc))
-    });
-    console.log(documents)
-    return documents;
-  }
-
-  parseDocumentArray(data): Document[]{
-    var documents = new Array<Document>();
-    data.forEach(x=> {
-      let doc = this.checkDocument(data, x);
-      documents.push(this.parseDocument(doc))
-    });
-    console.log(documents)
-    return documents;
-  }
-
-  checkDocument(data, document){
-    console.log(document)
-    if(document.constructor == Object){
-      return document
-    } else {
-      return findInDictAfterCirc(data, "document_id", document)
-    }
-  }
-
-  parseDocument(data): Document{
-    return <Document>{
-      document_id: data["document_id"],
-      name: data["name"],
-      path: data["path"],
-      description: data["description"]
-    }
   }
 
 }
