@@ -57,9 +57,14 @@ export class Parser{
 
   parseCompanyInfo(res){
     return {
-      "company": this.parseClientCompany(res["company"]),
-      "clients": this.parseClientArray(res["clients"])
+      "company": this.parseCCFromCompanyInfo(res["company"], res),
+      "clients": this.parseClientArrayFromCCInfo(res["clients"], res)
     }
+  }
+
+  parseCCFromCompanyInfo(data, res){
+    let cc = this.checkElementById(res, data, "company_id")
+    return this.parseClientCompany(cc)
   }
 
 // ARRAY PARSERS ----------------------------------------
@@ -72,10 +77,10 @@ export class Parser{
     return calendars;
   }
 
-  parseDocumentArrayFromClientInfo(data, docs): Document[]{
+  parseDocumentArrayFromClientInfo(data, res): Document[]{
     var documents = new Array<Document>();
     data.forEach(x=> {
-      let doc = this.checkElementById(docs, x, "document_id");
+      let doc = this.checkElementById(res, x, "document_id");
       documents.push(this.parseDocument(doc))
     });
     console.log(documents)
@@ -96,6 +101,15 @@ export class Parser{
     var clients = new Array<Client>();
     data.forEach(x=> {
       let client = this.checkElementById(data, x, "user_id");
+      clients.push(this.parseClient(client))
+    });
+    return clients;
+  }
+  
+  parseClientArrayFromCCInfo(data, res): Client[] {
+    var clients = new Array<Client>();
+    data.forEach(x=> {
+      let client = this.checkElementById(res, x, "user_id");
       clients.push(this.parseClient(client))
     });
     return clients;
@@ -139,15 +153,15 @@ export class Parser{
 // SIMPLE PARSERS ----------------------------------------
   parseClient(data): Client{
     let role_check = getRole(data["roles"])
-      return <Client>{
-        id: data["user_id"],
-        employee_id: data["employee"],
-        company: this.parseClientCompany(data["company"]),
-        first_name: data["first_name"],
-        last_name: data["last_name"],
-        username: data["username"],
-        role: role_check,
-      }
+    return <Client>{
+      id: data["user_id"],
+      employee_id: data["employee"],
+      company: this.parseClientCompany(data["company"]),
+      first_name: data["first_name"],
+      last_name: data["last_name"],
+      username: data["username"],
+      role: role_check,
+    }
   }
 
   parseCalendar(data): Calendar{
