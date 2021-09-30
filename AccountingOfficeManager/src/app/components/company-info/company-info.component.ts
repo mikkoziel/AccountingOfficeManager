@@ -42,14 +42,12 @@ export class CompanyInfoComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.company_id = params['id'];
       console.log(this.company_id)
-      this.companyService.getCompany(this.company_id).subscribe(res=>{
-        this.company = res;
+      this.companyService.getCompanyInfo(this.company_id).subscribe(res=>{
+        // console.log(res)
+        this.company = res["company"];
         this.dataSource = Object.entries(this.company);
         this.dataSource.splice(2,1);
-        this.spinnerFlag += 1;
-      })
-      this.clientService.getClientsForCompany(this.company_id).subscribe(res=>{
-        this.clients = res;
+        this.clients = res["clients"];
         this.spinnerFlag += 1;
       })
     });
