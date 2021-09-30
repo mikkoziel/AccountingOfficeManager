@@ -36,24 +36,29 @@ export class ClientInfoComponent implements OnInit {
     })
     this.route.params.subscribe(params => {
       this.client_id = params['id'];
-      this.clientService.getClient(this.client_id).subscribe(res =>{
-        this.client = res;
-        this.dataSource = Object.entries({
-          ID: this.client.id,
-          FirstName: this.client.first_name,
-          LastName: this.client.last_name,
-          Username: this.client.username,
-          Company: this.client.company.name,
-          Employee: this.client.employee_id,
-          Role: this.client.role
-        });
+      this.clientService.getClientInfo(this.client_id).subscribe(res =>{
+        this.client = res["client"];
+        this.parseDataSource();
+        this.documents = res["documents"];
         this.spinnerFlag += 1;
       })
-      this.clientService.getDocumentForClient(this.client_id).subscribe(res=>{
-        this.documents = res;
-        this.spinnerFlag += 1;
-      })
+      // this.clientService.getDocumentForClient(this.client_id).subscribe(res=>{
+      //   this.documents = res;
+      //   this.spinnerFlag += 1;
+      // })
     })
+  }
+
+  private parseDataSource(){
+    this.dataSource = Object.entries({
+      ID: this.client.id,
+      FirstName: this.client.first_name,
+      LastName: this.client.last_name,
+      Username: this.client.username,
+      Company: this.client.company.name,
+      Employee: this.client.employee_id,
+      Role: this.client.role
+    });
   }
 
 }
