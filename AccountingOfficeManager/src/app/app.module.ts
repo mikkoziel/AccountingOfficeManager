@@ -56,6 +56,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Parser } from './utils/parser';
 
 const components = [
   AppComponent,
@@ -127,7 +128,7 @@ const material = [
       }
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, Parser],
   bootstrap: [AppComponent],
   schemas :[CUSTOM_ELEMENTS_SCHEMA],
 })
