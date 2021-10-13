@@ -2,7 +2,10 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
 .component_div {
     margin: 2vh 5%; 

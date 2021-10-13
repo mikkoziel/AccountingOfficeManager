@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { Client } from '../entity/client';
 import { Document } from '../entity/document';
-import { getRole } from '../utils/utils';
+import { findInDictAfterCirc, getRole } from '../utils/utils';
 import { CompanyService } from './company.service';
 import { ServerService } from './server.service';
 
@@ -112,6 +112,23 @@ export class ClientService {
     )
   }
 
+  getClientInfo(id){
+    return this.server.request('GET', '/client/client-info/' + id)
+    .pipe(
+      tap((res:Response) => console.log(res)),
+      map((res:any) => {
+        return this.parseClientInfo(res);
+      })
+    );
+  }
+
+  parseClientInfo(res){
+    return {
+      "client": this.parseClient(res["client"]),
+      "documents": this.parseDocumentArrayFromClientInfo(res["documents"], res)
+    }
+  }
+
   parseClientArray(data): Client[] {
     var clients = new Array<Client>();
     data.forEach(x=>
@@ -133,12 +150,33 @@ export class ClientService {
       }
   }
 
+  parseDocumentArrayFromClientInfo(data, docs): Document[]{
+    var documents = new Array<Document>();
+    data.forEach(x=> {
+      let doc = this.checkDocument(docs, x);
+      documents.push(this.parseDocument(doc))
+    });
+    console.log(documents)
+    return documents;
+  }
+
   parseDocumentArray(data): Document[]{
     var documents = new Array<Document>();
-    data.forEach(x=>
-      documents.push(this.parseDocument(x))
-    );
+    data.forEach(x=> {
+      let doc = this.checkDocument(data, x);
+      documents.push(this.parseDocument(doc))
+    });
+    console.log(documents)
     return documents;
+  }
+
+  checkDocument(data, document){
+    console.log(document)
+    if(document.constructor == Object){
+      return document
+    } else {
+      return findInDictAfterCirc(data, "document_id", document)
+    }
   }
 
   parseDocument(data): Document{

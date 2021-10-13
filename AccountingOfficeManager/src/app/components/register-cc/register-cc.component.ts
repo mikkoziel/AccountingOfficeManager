@@ -48,7 +48,7 @@ export class RegisterCcComponent implements OnInit {
     })
     
     request.subscribe(() => {
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
       this.spinnerFlag -= 1;
     })
   }

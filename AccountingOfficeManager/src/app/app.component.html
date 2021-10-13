@@ -1,5 +1,6 @@
 <div class="all">
-  <div class="header" id="header">
+
+  <!-- <div class="header" id="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header">
       <a class="navbar-brand" (click)="routeLogo()" translate>app.title</a>
       <span class="spacer"></span>
@@ -13,45 +14,45 @@
           [ngStyle]="{'flex': isMenuCollapsed ? '0 1 auto': '0 1 100%'}"
           > 
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <!-- <a class="nav-link" [routerLink]="'/cart'" (click)="isMenuCollapsed = true">Cart</a> -->
+          <li class="nav-item"> -->
+            <!-- <a class="nav-link" [routerLink]="'/cart'" (click)="isMenuCollapsed = true">Cart</a>
             <mat-icon routerLink="/user-home">home</mat-icon>
           </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a> -->
+          <li class="nav-item"> -->
+            <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a>
             <mat-icon a (click)="onLogout()">logout</mat-icon>
           </li>
-          <li class="nav-item">
+          <li class="nav-item"> -->
             <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a> -->
-            <mat-icon a (click)='changeLang("pl")'>PL</mat-icon>
-          </li>
+            <!-- <mat-icon a (click)='changeLang("pl")'>PL</mat-icon>
+          </li> -->
           
-          <li class="nav-item">
+          <!-- <li class="nav-item"> -->
             <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a> -->
-            <mat-icon a (click)='changeLang("en")'>ENG</mat-icon>
+            <!-- <mat-icon a (click)='changeLang("en")'>ENG</mat-icon>
           </li>
         </ul>
       </div>
     </nav>
-  </div>
+  </div> -->
 
-  <mat-sidenav-container class="container_class">  
-    <!-- <mat-sidenav #sidenav class="sidenav_class" mode="side" opened> -->
-      <!-- <div>
+  <p class="p-header">
+    <mat-toolbar class="header">
+      <a class="navbar-brand" (click)="routeLogo()">{{title}}</a>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon routerLink="/user-home">home</mat-icon>
-      </div>  
-      <div>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon a (click)="onLogout()">logout</mat-icon>
-      </div> -->
-      <!-- <mat-divider></mat-divider> -->
-    <!-- </mat-sidenav> -->
-    <mat-sidenav-content>
-      <!-- <button mat-raised-button color="warn" (click)="sidenav.toggle()" class="open_close">
-        <mat-icon *ngIf="!sidenav.opened">chevron_right</mat-icon>
-        <mat-icon *ngIf="sidenav.opened">chevron_left</mat-icon>
-      </button> -->
-      <router-outlet class="body"></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>  
+      </button>
+    </mat-toolbar>
+  </p>
+
+  <!-- <mat-sidenav-container class="container_class">  
+    <mat-sidenav-content> -->
+  <router-outlet class="body"></router-outlet>
+    <!-- </mat-sidenav-content>
+  </mat-sidenav-container>   -->
 </div>
 
