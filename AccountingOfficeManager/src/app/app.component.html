@@ -1,48 +1,21 @@
 <div class="all">
 
-  <!-- <div class="header" id="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header">
-      <a class="navbar-brand" (click)="routeLogo()" translate>app.title</a>
-      <span class="spacer"></span>
-    
-      <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-        &#9776;
-      </button>
-    
-      <div [ngbCollapse]="isMenuCollapsed" 
-          class="collapse navbar-collapse"
-          [ngStyle]="{'flex': isMenuCollapsed ? '0 1 auto': '0 1 100%'}"
-          > 
-        <ul class="navbar-nav">
-          <li class="nav-item"> -->
-            <!-- <a class="nav-link" [routerLink]="'/cart'" (click)="isMenuCollapsed = true">Cart</a>
-            <mat-icon routerLink="/user-home">home</mat-icon>
-          </li>
-          <li class="nav-item"> -->
-            <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a>
-            <mat-icon a (click)="onLogout()">logout</mat-icon>
-          </li>
-          <li class="nav-item"> -->
-            <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a> -->
-            <!-- <mat-icon a (click)='changeLang("pl")'>PL</mat-icon>
-          </li> -->
-          
-          <!-- <li class="nav-item"> -->
-            <!-- <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a> -->
-            <!-- <mat-icon a (click)='changeLang("en")'>ENG</mat-icon>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div> -->
-
   <p class="p-header">
     <mat-toolbar class="header">
-      <a class="navbar-brand" (click)="routeLogo()">{{title}}</a>
+      <a class="navbar-brand" (click)="routeLogo()" translate>app.title</a>
       <span class="example-spacer"></span>
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon routerLink="/user-home">home</mat-icon>
       </button>
+
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>language</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)='changeLang("pl")'>PL</button>
+        <button mat-menu-item (click)='changeLang("en")'>ENG</button>
+      </mat-menu>
+
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon a (click)="onLogout()">logout</mat-icon>
       </button>
