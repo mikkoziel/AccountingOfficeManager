@@ -29,6 +29,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -94,6 +95,7 @@ const material = [
   MatChipsModule,
   MatAutocompleteModule,
   MatSortModule,
+  MatToolbarModule
 ]
 
 @NgModule({

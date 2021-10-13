@@ -27,3 +27,15 @@
     background: rgb(230, 230, 230);
     color: black;
 }
+
+.header {
+    background-color: rgb(83, 186, 255);
+}
+
+.p-header {
+    margin: 0 0 0;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
